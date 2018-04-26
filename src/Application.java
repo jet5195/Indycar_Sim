@@ -1,3 +1,4 @@
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 
 import java.io.IOException;
@@ -12,6 +13,13 @@ public class Application {
     static List<Track> allTrackList = new ArrayList<>();
     static List<Driver> activeDriverList = new ArrayList<>();
     static List<Race> activeRaceList = new ArrayList<>();
+    static List<Car> allCarList = new ArrayList<>();
+    static List<Car> activeCarList = new ArrayList<>();
+    static List<Team> allTeamList = new ArrayList<>();
+    static List<Team> activeTeamList = new ArrayList<>();
+    static List<Sponsor> allSponsorList = new ArrayList<>();
+    static List<Manufacturer> allManufacturerList = new ArrayList<>();
+    static List<Manufacturer> activeManufacturerList = new ArrayList<>();
 
     public static void main(String[] args) {
 
@@ -698,4 +706,48 @@ public class Application {
 
     }
 
+    public static void existingManufacturers(){
+        allManufacturerList.add(new Manufacturer("Chevrolet"));
+        allManufacturerList.add(new Manufacturer("Honda"));
+        allManufacturerList.add(new Manufacturer("Alfa Romeo"));
+        allManufacturerList.get(0).setAttributes(65,65,80);
+        allManufacturerList.get(1).setAttributes(75,75,65);
+        activeManufacturerList.add(allManufacturerList.get(0));
+        activeManufacturerList.add(allManufacturerList.get(1));
+    }
+
+    public static void existingCarsTeams(){
+        allTeamList.add(new Team("Team Penske", activeManufacturerList.get(0)));
+        allCarList.add(allTeamList.get(0).createCar(allDriverList.get(15), "2", 0));
+        //Newgarden 2
+        allCarList.add(allTeamList.get(0).createCar(allDriverList.get(9), "3", 2));
+
+
+
+        allTeamList.add(new Team("Chip Ganassi Racing", activeManufacturerList.get(1)));
+
+        allTeamList.add(new Team("Andretti Autosport", activeManufacturerList.get(1)));
+
+        allTeamList.add(new Team("Rahal Letterman Lanigan Racing", activeManufacturerList.get(1)));
+
+        allTeamList.add(new Team("Dale Coyne Racing", activeManufacturerList.get(1)));
+
+        allTeamList.add(new Team("Schmidt Peterson Motorsports", activeManufacturerList.get(1)));
+
+        allTeamList.add(new Team("Ed Carpenter Racing", activeManufacturerList.get(0)));
+
+        allTeamList.add(new Team("A.J. Foyt Enterprises", activeManufacturerList.get(0)));
+
+        allTeamList.add(new Team("Harding Racing", activeManufacturerList.get(0)));
+        //88 chaves
+        allTeamList.add(new Team("Carlin", activeManufacturerList.get(0)));
+        //23 Kimball, 59 Chilton
+        allTeamList.add(new Team("Juncos Racing", activeManufacturerList.get(0)));
+        //32 Kaiser/Bender
+        allTeamList.add(new Team("Dreyer & Reinbold Racing", activeManufacturerList.get(0)));
+        //24 karam
+
+
+
+    }
 }
