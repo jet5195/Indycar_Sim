@@ -7,6 +7,8 @@ public class Driver implements Comparable<Driver> {
     private String lastName;
     private String nationality;
     private int marketability;
+    private int qualify;
+    private int street;
     private int road;
     private int oval;
     private int consistency;
@@ -48,8 +50,11 @@ public class Driver implements Comparable<Driver> {
         this.age = age;
     }
 
-    public void setAttributes(int marketablity, int road, int oval, int consistency, int aggression, int potential, int workEthic) {
+    public void setAttributes(int marketablity, int qualify, int street, int road, int oval, int consistency,
+                              int aggression, int potential, int workEthic) {
         this.marketability = marketablity;
+        this.qualify = qualify;
+        this.street = street;
         this.road = road;
         this.oval = oval;
         this.consistency = consistency;
@@ -89,6 +94,14 @@ public class Driver implements Comparable<Driver> {
 
     public void setMarketablity(int marketablity) {
         this.marketability = marketablity;
+    }
+
+    public int getStreet(){
+        return street;
+    }
+
+    public void setStreet(int street){
+        this.street = street;
     }
 
     public int getRoad() {

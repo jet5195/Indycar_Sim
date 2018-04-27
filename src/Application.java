@@ -342,9 +342,9 @@ public class Application {
 
     public static double createSpeed(Driver theDriver, Race theRace) {
         int speedConstant = 1800;
-        double ability = theDriver.getRaceAbility();
+        double ability = theDriver.getRaceAbility()*.75;//was without the *.75
         double speedcalc = 0;
-        int inverseCon = 75 - theDriver.getConsistency() / 3;
+        int inverseCon = 75 - (theDriver.getConsistency() / 4); // was / 3 not 4
         double rand = Math.random() * inverseCon;
         double aggBonus = Math.random() * (theDriver.getAggression() / 10);
         double noise = Math.random() * 125 + 75;
@@ -531,8 +531,10 @@ public class Application {
         int subtract = (int) (Math.random() * inverseCon);
         if (theRace.getType().equals("Oval")) {
             ability = theDriver.getOval();
-        } else if (theRace.getType().equals("RC") || theRace.getType().equals("Street")) {
+        } else if (theRace.getType().equals("RC")) {
             ability = theDriver.getRoad();
+        } else if (theRace.getType().equals("Street")){
+            ability = theDriver.getStreet();
         }
         int rand = (int) (Math.random() * 20);
         return(ability + rand - subtract);
@@ -545,104 +547,107 @@ public class Application {
 
     public static void existingDrivers() {
         allDriverList.add(new Driver("Alexander", "Rossi", "USA", 25));
-        allDriverList.get(0).setAttributes(75, 72, 75, 73, 44, 90, 85);
+        allDriverList.get(0).setAttributes(70, 75, 76,84, 75, 73, 72, 90, 82);
         activeDriverList.add(allDriverList.get(0));
         allDriverList.add(new Driver("Carlos", "Munoz", "Columbia", 25));
-        allDriverList.get(1).setAttributes(55, 53, 68, 46, 55, 75, 50);
+        allDriverList.get(1).setAttributes(50, 65,48,53, 68, 46, 55, 78, 58);
         activeDriverList.add(allDriverList.get(1));
         allDriverList.add(new Driver("Charlie", "Kimball", "USA", 25));
-        allDriverList.get(2).setAttributes(85, 50, 55, 35, 90, 55, 70);
+        allDriverList.get(2).setAttributes(80, 60,56,50, 55, 41, 90, 55, 70);
         activeDriverList.add(allDriverList.get(2));
         allDriverList.add(new Driver("Conor", "Daly", "USA", 25));
-        allDriverList.get(3).setAttributes(60, 57, 62, 53, 60, 80, 70);
+        allDriverList.get(3).setAttributes(60, 60,54,57, 62, 48, 60, 75, 70);
         activeDriverList.add(allDriverList.get(3));
         allDriverList.add(new Driver("Ed", "Carpenter", "USA", 25));
-        allDriverList.get(4).setAttributes(80, 25, 67, 43, 50, 45, 65);
+        allDriverList.get(4).setAttributes(82, 80, 35, 35, 67, 43, 50, 45, 65);
         activeDriverList.add(allDriverList.get(4));
         allDriverList.add(new Driver("Ed", "Jones", "UAE", 25));
-        allDriverList.get(5).setAttributes(85, 70, 50, 55, 65, 80, 70);
+        allDriverList.get(5).setAttributes(83, 70, 70, 70, 50, 68, 65, 77, 67);
         activeDriverList.add(allDriverList.get(5));
         allDriverList.add(new Driver("Esteban", "Gutierrez", "Mexico", 25));
-        allDriverList.get(6).setAttributes(75, 63, 49, 45, 60, 80, 70);
+        allDriverList.get(6).setAttributes(74, 60, 63, 63, 49, 45, 60, 80, 64);
         activeDriverList.add(allDriverList.get(6));
         allDriverList.add(new Driver("Gabby", "Chaves", "Columbia", 25));
-        allDriverList.get(7).setAttributes(60, 35, 45, 30, 45, 75, 60);
+        allDriverList.get(7).setAttributes(60, 45, 35, 58, 68, 45, 45, 73, 60);
         activeDriverList.add(allDriverList.get(7));
         allDriverList.add(new Driver("Graham", "Rahal", "USA", 25));
-        allDriverList.get(8).setAttributes(85, 77, 70, 80, 59, 85, 70);
+        allDriverList.get(8).setAttributes(87, 65, 83, 77, 70, 78, 59, 85, 70);
         activeDriverList.add(allDriverList.get(8));
         allDriverList.add(new Driver("Helio", "Castroneves", "Brazil", 25));
-        allDriverList.get(9).setAttributes(90, 72, 82, 66, 74, 80, 70);
+        allDriverList.get(9).setAttributes(85, 85, 72, 68, 82, 66, 78, 80, 70);
         activeDriverList.add(allDriverList.get(9));
         allDriverList.add(new Driver("J.R.", "Hildebrand", "USA", 25));
-        allDriverList.get(10).setAttributes(65, 42, 74, 58, 60, 65, 75);
+        allDriverList.get(10).setAttributes(65, 70, 40, 42, 70, 48, 60, 65, 75);
         activeDriverList.add(allDriverList.get(10));
         allDriverList.add(new Driver("Jack", "Harvey", "England", 25));
-        allDriverList.get(11).setAttributes(65, 58, 40, 40, 65, 75, 50);
+        allDriverList.get(11).setAttributes(60, 45, 60, 58, 45, 48,50,60,65);
         activeDriverList.add(allDriverList.get(11));
         allDriverList.add(new Driver("James", "Davison", "Australia", 25));
-        //driverList.get(12).setAttributes();
+        allDriverList.get(12).setAttributes(55,45,45,54,48,36,69,55,65);
+        activeDriverList.add(allDriverList.get(12));
         allDriverList.add(new Driver("James", "Hinchcliffe", "Canada", 25));
-        allDriverList.get(13).setAttributes(90, 70, 62, 65, 60, 80, 70);
+        allDriverList.get(13).setAttributes(85, 70, 75, 70, 64, 65, 60, 80, 70);
         activeDriverList.add(allDriverList.get(13));
         allDriverList.add(new Driver("Jay", "Howard", "England", 25));
-        //driverList.get(14).setAttributes();
+        allDriverList.get(14).setAttributes(45,45,51,48,50,35,55,50,45);
+        activeDriverList.add(allDriverList.get(14));
         allDriverList.add(new Driver("Josef", "Newgarden", "USA", 25));
-        allDriverList.get(15).setAttributes(85, 85, 78, 78, 69, 95, 80);
+        allDriverList.get(15).setAttributes(77, 70, 76, 86, 81, 75, 78, 95, 80);
         activeDriverList.add(allDriverList.get(15));
         allDriverList.add(new Driver("Juan Pablo", "Montoya", "Columbia", 25));
-        allDriverList.get(16).setAttributes(70, 65, 70, 50, 88, 75, 55);
+        allDriverList.get(16).setAttributes(71, 80, 72, 68, 73, 50, 88, 75, 55);
+        activeDriverList.add(allDriverList.get(16));
         allDriverList.add(new Driver("Marco", "Andretti", "USA", 25));
-        allDriverList.get(17).setAttributes(85, 56, 71, 38, 38, 65, 45);
+        allDriverList.get(17).setAttributes(88, 70, 63, 56, 71, 69, 38, 72, 48);
         activeDriverList.add(allDriverList.get(17));
         allDriverList.add(new Driver("Max", "Chilton", "England", 25));
-        allDriverList.get(18).setAttributes(70, 52, 45, 40, 70, 75, 65);
+        allDriverList.get(18).setAttributes(76, 65, 69, 62, 55, 47, 70, 71, 65);
         activeDriverList.add(allDriverList.get(18));
         allDriverList.add(new Driver("Mikhail", "Aleshin", "Russia", 25));
-        allDriverList.get(19).setAttributes(80, 58, 64, 25, 91, 80, 50);
+        allDriverList.get(19).setAttributes(76, 80, 67, 63, 72, 25, 91, 80, 47);
         allDriverList.add(new Driver("Oriol", "Servia", "Spain", 25));
-        //driverList.get(20).setAttributes();
+        allDriverList.get(20).setAttributes(44,60,52,47,63,45,40,40,75);
         allDriverList.add(new Driver("Pippa", "Mann", "USA", 25));
-        allDriverList.get(21).setAttributes(80, 25, 45, 45, 35, 45, 70);
+        allDriverList.get(21).setAttributes(72, 35,30, 30, 45, 55, 35, 45, 70);
         activeDriverList.add(allDriverList.get(21));
         allDriverList.add(new Driver("Robert", "Wickens", "Canada", 25));
-        allDriverList.get(22).setAttributes(70, 78, 60, 60, 55, 90, 85);
+        allDriverList.get(22).setAttributes(65, 80, 77, 75, 68, 68, 64, 85, 85);
         activeDriverList.add(allDriverList.get(22));
         allDriverList.add(new Driver("Ryan", "Hunter-Reay", "USA", 25));
-        allDriverList.get(23).setAttributes(80, 67, 80, 65, 50, 80, 75);
+        allDriverList.get(23).setAttributes(78, 70, 74, 67, 80, 65, 64, 80, 75);
         activeDriverList.add(allDriverList.get(23));
         allDriverList.add(new Driver("Sage", "Karam", "USA", 25));
-        allDriverList.get(24).setAttributes(55, 45, 70, 20, 86, 85, 40);
+        allDriverList.get(24).setAttributes(55, 70, 45, 45, 70, 20, 86, 85, 30);
         allDriverList.add(new Driver("Scott", "Dixon", "New Zealand", 25));
-        allDriverList.get(25).setAttributes(65, 81, 69, 95, 40, 90, 90);
+        allDriverList.get(25).setAttributes(65, 70, 75, 88, 69, 95, 40, 85, 90);
         activeDriverList.add(allDriverList.get(25));
         allDriverList.add(new Driver("Sebastian", "Bourdais", "France", 25));
-        allDriverList.get(26).setAttributes(70, 90, 60, 84, 66, 85, 85);
+        allDriverList.get(26).setAttributes(67, 65, 88, 90, 60, 84, 75, 85, 85);
         activeDriverList.add(allDriverList.get(26));
         allDriverList.add(new Driver("Sebastian", "Saavedra", "Columbia", 25));
-        allDriverList.get(27).setAttributes(80, 46, 59, 30, 73, 75, 40);
+        allDriverList.get(27).setAttributes(76, 75, 46, 56, 53, 30, 73, 76, 38);
         allDriverList.add(new Driver("Simon", "Pagenaud", "France", 25));
-        allDriverList.get(28).setAttributes(65, 82, 69, 92, 40, 90, 70);
+        allDriverList.get(28).setAttributes(67, 75, 78, 79, 69, 92, 40, 82, 70);
         activeDriverList.add(allDriverList.get(28));
         allDriverList.add(new Driver("Spencer", "Pigot", "USA", 25));
-        allDriverList.get(29).setAttributes(65, 66, 40, 55, 55, 80, 75);
+        allDriverList.get(29).setAttributes(65, 70, 71, 66, 40, 56, 55, 77, 75);
         activeDriverList.add(allDriverList.get(29));
         allDriverList.add(new Driver("Takuma", "Sato", "Japan", 25));
-        allDriverList.get(30).setAttributes(80, 81, 76, 50, 92, 75, 60);
+        allDriverList.get(30).setAttributes(83, 70, 79, 81, 76, 50, 92, 75, 60);
         activeDriverList.add(allDriverList.get(30));
         allDriverList.add(new Driver("Tony", "Kanaan", "Brazil", 25));
-        allDriverList.get(31).setAttributes(85, 55, 76, 48, 74, 60, 75);
+        allDriverList.get(31).setAttributes(84, 65, 61, 55, 76, 46, 77, 60, 75);
         activeDriverList.add(allDriverList.get(31));
         allDriverList.add(new Driver("Tristian", "Vautier", "France", 25));
-        //driverList.get(32).setAttributes();
+        allDriverList.get(32).setAttributes(63,65,51,67,48,50,73,67,48);
         allDriverList.add(new Driver("Will", "Power", "Australia", 25));
-        allDriverList.get(33).setAttributes(75, 86, 75, 70, 80, 90, 65);
+        allDriverList.get(33).setAttributes(65, 90, 84, 85, 77, 65, 80, 84, 65);
         activeDriverList.add(allDriverList.get(33));
         allDriverList.add(new Driver("Zach", "Veach", "USA", 25));
-        allDriverList.get(34).setAttributes(80, 65, 55, 55, 65, 85, 65);
+        allDriverList.get(34).setAttributes(81, 55, 52, 52, 45, 53, 65, 75, 80);
         activeDriverList.add(allDriverList.get(34));
         allDriverList.add(new Driver("Zachary", "Claman De Melo", "Canada", 1998));
-        allDriverList.get(35).setAttributes(50, 55, 45, 60, 45, 75, 65);
+        allDriverList.get(35).setAttributes(55, 65, 54, 63, 52, 46, 70, 75, 60);
         activeDriverList.add(allDriverList.get(35));
         allDriverList.add(new Driver("Felix", "Rosenqvist", "Sweden", 26));
         //driverList.get(36).setAttributes();
@@ -709,7 +714,7 @@ public class Application {
     public static void existingManufacturers(){
         allManufacturerList.add(new Manufacturer("Chevrolet"));
         allManufacturerList.add(new Manufacturer("Honda"));
-        allManufacturerList.add(new Manufacturer("Alfa Romeo"));
+        allManufacturerList.add(new Manufacturer("Alfa-Romeo"));
         allManufacturerList.get(0).setAttributes(65,65,80);
         allManufacturerList.get(1).setAttributes(75,75,65);
         activeManufacturerList.add(allManufacturerList.get(0));
@@ -718,6 +723,7 @@ public class Application {
 
     public static void existingCarsTeams(){
         allTeamList.add(new Team("Team Penske", activeManufacturerList.get(0)));
+        allTeamList.get(0).setAttributes(80, 70, 80);
         allCarList.add(allTeamList.get(0).createCar(allDriverList.get(15), "2", 0));
         //Newgarden 2
         allCarList.add(allTeamList.get(0).createCar(allDriverList.get(9), "3", 2));
@@ -728,41 +734,96 @@ public class Application {
         //Pagenaud 22
 
         allTeamList.add(new Team("Chip Ganassi Racing", activeManufacturerList.get(1)));
+        allTeamList.get(1).setAttributes(75, 64, 90);
         allCarList.add(allTeamList.get(1).createCar(allDriverList.get(25), "9", 0));
         //Dixon 9
         allCarList.add(allTeamList.get(1).createCar(allDriverList.get(5), "10", 0));
         //Jones 10
 
         allTeamList.add(new Team("Andretti Autosport", activeManufacturerList.get(1)));
+        allTeamList.get(2).setAttributes(65, 80, 70);
         //allCarList.add(allTeamList.get(2).createCar(allDriverList.get(), "25", 3));
         //Wilson 25
-        allCarList.add(allTeamList.get(2).createCar(allDriverList.get(), "26", 0));
+        allCarList.add(allTeamList.get(2).createCar(allDriverList.get(34), "26", 0));
         //Veach 26
-        allCarList.add(allTeamList.get(2).createCar(allDriverList.get(), "27", 0));
+        allCarList.add(allTeamList.get(2).createCar(allDriverList.get(0), "27", 0));
         //Rossi 27
-        allCarList.add(allTeamList.get(2).createCar(allDriverList.get(), "28", 0));
+        allCarList.add(allTeamList.get(2).createCar(allDriverList.get(23), "28", 0));
         //Hunter-Reay 28
-        allCarList.add(allTeamList.get(2).createCar(allDriverList.get(), "29", 0));
+        allCarList.add(allTeamList.get(2).createCar(allDriverList.get(1), "29", 0));
         //Munoz 29
-        allCarList.add(allTeamList.get(2).createCar(allDriverList.get(), "98", 0));
+        allCarList.add(allTeamList.get(2).createCar(allDriverList.get(17), "98", 0));
+        //Marco 98
 
         allTeamList.add(new Team("Rahal Letterman Lanigan Racing", activeManufacturerList.get(1)));
+        allTeamList.get(3).setAttributes(75, 65, 65);
+        allCarList.add(allTeamList.get(3).createCar(allDriverList.get(8), "15", 0));
+        //Rahal 15
+        allCarList.add(allTeamList.get(3).createCar(allDriverList.get(30), "30", 0));
+        //Sato 30
+        allCarList.add(allTeamList.get(3).createCar(allDriverList.get(20), "64", 3));
+        //Servia 64
 
         allTeamList.add(new Team("Dale Coyne Racing", activeManufacturerList.get(1)));
+        allTeamList.get(4).setAttributes(70, 60, 70);
+        allCarList.add(allTeamList.get(4).createCar(allDriverList.get(26), "18", 0));
+        //Bourdais 18
+        allCarList.add(allTeamList.get(4).createCar(allDriverList.get(35), "19", 0));
+        //de melo/fittipaldi 19
+        allCarList.add(allTeamList.get(4).createCar(allDriverList.get(3), "17", 3));
+        //Daly 17
+        allCarList.add(allTeamList.get(4).createCar(allDriverList.get(21), "63", 3));
+        //Pippa 63
 
         allTeamList.add(new Team("Schmidt Peterson Motorsports", activeManufacturerList.get(1)));
+        allTeamList.get(5).setAttributes(75, 65, 70);
+        allCarList.add(allTeamList.get(5).createCar(allDriverList.get(13), "5", 0));
+        //Hinch 5
+        allCarList.add(allTeamList.get(5).createCar(allDriverList.get(22), "6", 0));
+        //Wickens 6
+        allCarList.add(allTeamList.get(5).createCar(allDriverList.get(14), "7", 3));
+        //Howard 7
+        allCarList.add(allTeamList.get(5).createCar(allDriverList.get(11), "60", 3));
+        //Harvey 60
 
         allTeamList.add(new Team("Ed Carpenter Racing", activeManufacturerList.get(0)));
+        allTeamList.get(6).setAttributes(60, 70, 60);
+        allCarList.add(allTeamList.get(6).createCar(allDriverList.get(4), "20", 1));
+        //Carpenter/King 20
+        allCarList.add(allTeamList.get(6).createCar(allDriverList.get(29), "21", 0));
+        //Pigot 21
+        //allCarList.add(allTeamList.get(6).createCar(allDriverList.get(), "13", 3));
+        //Danica 13
 
         allTeamList.add(new Team("A.J. Foyt Enterprises", activeManufacturerList.get(0)));
+        allTeamList.get(0).setAttributes(55, 65, 60);
+        //allCarList.add(allTeamList.get(7).createCar(allDriverList.get(), "4", 0));
+        //Leist 4
+        allCarList.add(allTeamList.get(7).createCar(allDriverList.get(31), "14", 0));
+        //Kanaan 14
+        allCarList.add(allTeamList.get(7).createCar(allDriverList.get(12), "33", 3));
+        //Davison 33
 
         allTeamList.add(new Team("Harding Racing", activeManufacturerList.get(0)));
+        allTeamList.get(8).setAttributes(50, 50, 50);
+        allCarList.add(allTeamList.get(8).createCar(allDriverList.get(7), "88", 0));
         //88 chaves
+
         allTeamList.add(new Team("Carlin", activeManufacturerList.get(0)));
-        //23 Kimball, 59 Chilton
+        allTeamList.get(9).setAttributes(50, 50, 50);
+        allCarList.add(allTeamList.get(9).createCar(allDriverList.get(2), "23", 0));
+        //23 Kimball
+        allCarList.add(allTeamList.get(9).createCar(allDriverList.get(18), "59", 0));
+        //59 Chilton
+
         allTeamList.add(new Team("Juncos Racing", activeManufacturerList.get(0)));
+        allTeamList.get(10).setAttributes(50, 50, 50);
+        //allCarList.add(allTeamList.get(10).createCar(allDriverList.get(), "32", 0));
         //32 Kaiser/Bender
+
         allTeamList.add(new Team("Dreyer & Reinbold Racing", activeManufacturerList.get(0)));
+        allTeamList.get(11).setAttributes(50, 50, 50);
+        allCarList.add(allTeamList.get(11).createCar(allDriverList.get(24), "24", 3));
         //24 karam
 
 
