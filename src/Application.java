@@ -721,12 +721,30 @@ public class Application {
         allCarList.add(allTeamList.get(0).createCar(allDriverList.get(15), "2", 0));
         //Newgarden 2
         allCarList.add(allTeamList.get(0).createCar(allDriverList.get(9), "3", 2));
-
-
+        //Castroneves 3
+        allCarList.add(allTeamList.get(0).createCar(allDriverList.get(33), "12", 0));
+        //Power 12
+        allCarList.add(allTeamList.get(0).createCar(allDriverList.get(28), "22", 0));
+        //Pagenaud 22
 
         allTeamList.add(new Team("Chip Ganassi Racing", activeManufacturerList.get(1)));
+        allCarList.add(allTeamList.get(1).createCar(allDriverList.get(25), "9", 0));
+        //Dixon 9
+        allCarList.add(allTeamList.get(1).createCar(allDriverList.get(5), "10", 0));
+        //Jones 10
 
         allTeamList.add(new Team("Andretti Autosport", activeManufacturerList.get(1)));
+        //allCarList.add(allTeamList.get(2).createCar(allDriverList.get(), "25", 3));
+        //Wilson 25
+        allCarList.add(allTeamList.get(2).createCar(allDriverList.get(), "26", 0));
+        //Veach 26
+        allCarList.add(allTeamList.get(2).createCar(allDriverList.get(), "27", 0));
+        //Rossi 27
+        allCarList.add(allTeamList.get(2).createCar(allDriverList.get(), "28", 0));
+        //Hunter-Reay 28
+        allCarList.add(allTeamList.get(2).createCar(allDriverList.get(), "29", 0));
+        //Munoz 29
+        allCarList.add(allTeamList.get(2).createCar(allDriverList.get(), "98", 0));
 
         allTeamList.add(new Team("Rahal Letterman Lanigan Racing", activeManufacturerList.get(1)));
 
