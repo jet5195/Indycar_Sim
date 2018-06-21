@@ -18,6 +18,7 @@ public class Driver implements Comparable<Driver> {
     private int workEthic;
     private int DNFtendency;
     private int age;
+    private int specialist;//0 means no, 1 means oval, 2 means road/street
 
     //Race Stats
     private int raceAbility = 0;
@@ -62,6 +63,20 @@ public class Driver implements Comparable<Driver> {
         this.potential = potential;
         this.workEthic = workEthic;
         this.DNFtendency = ((100-this.consistency)+ this.aggression)/2;
+    }
+
+    public int getSpecialist(){
+        return specialist;
+    }
+
+    public void setSpecialist(){
+        if (oval>(1.75*road)&&oval>(1.75*street)){
+            specialist =1;
+        } else if(road>(oval*1.75)&&street>(oval*1.75)){
+            specialist = 2;
+        } else{
+            specialist = 0;
+        }
     }
 
     public String getFirstName() {

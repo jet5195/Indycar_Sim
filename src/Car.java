@@ -15,4 +15,9 @@ public class Car {
         this.fullTime = fullTime;
     }
 
+    //inherit stuff from team and combine it with driver values to get race values! Use them here. Switch a lot
+    //of stuff from the driver class to here that say whether or not a driver does well in a race
+    //also need to keep track of what team it is a part of. Maybe make it so the car keeps track of what team it is
+    //instead of the team keeping track of its cars?
+
 }
