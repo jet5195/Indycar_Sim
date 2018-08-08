@@ -73,8 +73,8 @@ public class Application {
     }
 
     public static void seasonMenu(Scanner scan) {
-        for (int i = 0; i < activeDriverList.size(); i++) {
-            activeDriverList.get(i).endOfSeasonReset();
+        for (int i = 0; i < allDriverList.size(); i++) {
+            allDriverList.get(i).endOfSeasonReset();
 
         }
         //System.out.println("Sorry, this mode is still under development");
@@ -128,8 +128,8 @@ public class Application {
         System.out.println("Season Stats");
         System.out.printf("%-30s %-8s %-8s %-8s %-8s %-8s %-8s\n", "Driver", "Points", "Wins", "Poles", "Podiums", "Laps Led", "DNFs");
         System.out.println("_______________________________________________________________________");
-        for (int i = 0; i < activeDriverList.size(); i++) {
-            Driver theDriver = activeDriverList.get(i);
+        for (int i = 0; i < allDriverList.size() && allDriverList.get(i).getPoints()>0; i++) {
+            Driver theDriver = allDriverList.get(i);
             System.out.printf("%-30s %-8d %-8d %-8d %-8d %-8d %-8d\n", theDriver, theDriver.getPoints(), theDriver.getSeasonWins(),
                     theDriver.getSeasonPoles(), theDriver.getSeasonPodiums(), theDriver.getSeasonLapsLed(), theDriver.getSeasonDnf());
         }
@@ -139,8 +139,8 @@ public class Application {
         System.out.println("Career Stats");
         System.out.printf("%-30s %-8s %-8s %-8s %-8s %-8s %-8s\n", "Driver", "Champ", "Wins", "Poles", "Podiums", "Laps Led", "DNFs");
         System.out.println("_______________________________________________________________________");
-        for (int i = 0; i < activeDriverList.size(); i++) {
-            Driver theDriver = activeDriverList.get(i);
+        for (int i = 0; i < allDriverList.size(); i++) {
+            Driver theDriver = allDriverList.get(i);
             System.out.printf("%-30s %-8d %-8d %-8d %-8d %-8d %-8d\n", theDriver, theDriver.getChampionships(), theDriver.getCareerWins(),
                     theDriver.getCareerPoles(), theDriver.getCareerPodiums(), theDriver.getCareerLapsLed(), theDriver.getCareerDnfs());
         }
@@ -148,31 +148,31 @@ public class Application {
 
     public static void printStandings() {
         sortStandings();
-        for (int i = 0; i < activeDriverList.size(); i++) {
+        for (int i = 0; i < allDriverList.size() && allDriverList.get(i).getPoints()>0; i++) {
             String start = (i + 1) + ". ";
-            System.out.printf("%-30s %d\n", start + activeDriverList.get(i).getFirstName() + " " + activeDriverList.get(i).getLastName(), activeDriverList.get(i).getPoints());
+            System.out.printf("%-30s %d\n", start + allDriverList.get(i).getFirstName() + " " + allDriverList.get(i).getLastName(), allDriverList.get(i).getPoints());
         }
     }
 
     public static void sortStandings() {
-        for (int i = 0; i < activeDriverList.size(); i++) {
-            int topPoints = activeDriverList.get(i).getPoints();
+        for (int i = 0; i < allDriverList.size(); i++) {
+            int topPoints = allDriverList.get(i).getPoints();
             int topPointsIndex = i;
-            for (int j = i + 1; j < activeDriverList.size(); j++) {
-                if (activeDriverList.get(j).getPoints() > topPoints) {
-                    topPoints = activeDriverList.get(j).getPoints();
+            for (int j = i + 1; j < allDriverList.size(); j++) {
+                if (allDriverList.get(j).getPoints() > topPoints) {
+                    topPoints = allDriverList.get(j).getPoints();
                     topPointsIndex = j;
                 }
             }
             if (topPointsIndex != i) {
-                Driver temp = activeDriverList.get(i);
-                activeDriverList.set(i, activeDriverList.get(topPointsIndex));
-                activeDriverList.set(topPointsIndex, temp);
+                Driver temp = allDriverList.get(i);
+                allDriverList.set(i, allDriverList.get(topPointsIndex));
+                allDriverList.set(topPointsIndex, temp);
             }
         }
     }
 
-    public static void indycar2018points(Race theRace) {
+    public static void indycar2018points2(Race theRace) {
         int mostLapsLed = 0;
         int mostLapsLedIndex = 0;
         int drconstant = 1;
@@ -265,9 +265,107 @@ public class Application {
                     activeDriverList.get(pos).addPoints(5*drconstant);
                     break;
             }
-            activeDriverList.get(pos).endOfRaceReset();
+            entryList.get(pos).endOfRaceReset();
         }
         activeDriverList.get(mostLapsLedIndex).addPoints(2);
+    }
+
+    public static void indycar2018points(Race theRace) {
+        int mostLapsLed = 0;
+        int mostLapsLedIndex = 0;
+        int drconstant = 1;
+        if(theRace.isDoublePoints()==true){
+            drconstant=2;
+        }
+        for (int pos = 0; pos < entryList.size(); pos++) {
+            int driverLapsLed = entryList.get(pos).getDriver().getLapsLed();
+            if (driverLapsLed > mostLapsLed) {
+                mostLapsLed = driverLapsLed;
+                mostLapsLedIndex = pos;
+            }
+            if (driverLapsLed > 0) {
+                entryList.get(pos).getDriver().addPoints(1);
+            }
+            switch (pos) {
+                case 0:
+                    entryList.get(pos).getDriver().addPoints(50*drconstant);
+                    break;
+                case 1:
+                    entryList.get(pos).getDriver().addPoints(40*drconstant);
+                    break;
+                case 2:
+                    entryList.get(pos).getDriver().addPoints(35*drconstant);
+                    break;
+                case 3:
+                    entryList.get(pos).getDriver().addPoints(32*drconstant);
+                    break;
+                case 4:
+                    entryList.get(pos).getDriver().addPoints(30*drconstant);
+                    break;
+                case 5:
+                    entryList.get(pos).getDriver().addPoints(28*drconstant);
+                    break;
+                case 6:
+                    entryList.get(pos).getDriver().addPoints(26*drconstant);
+                    break;
+                case 7:
+                    entryList.get(pos).getDriver().addPoints(24*drconstant);
+                    break;
+                case 8:
+                    entryList.get(pos).getDriver().addPoints(22*drconstant);
+                    break;
+                case 9:
+                    entryList.get(pos).getDriver().addPoints(20*drconstant);
+                    break;
+                case 10:
+                    entryList.get(pos).getDriver().addPoints(19*drconstant);
+                    break;
+                case 11:
+                    entryList.get(pos).getDriver().addPoints(18*drconstant);
+                    break;
+                case 12:
+                    entryList.get(pos).getDriver().addPoints(17*drconstant);
+                    break;
+                case 13:
+                    entryList.get(pos).getDriver().addPoints(16*drconstant);
+                    break;
+                case 14:
+                    entryList.get(pos).getDriver().addPoints(15*drconstant);
+                    break;
+                case 15:
+                    entryList.get(pos).getDriver().addPoints(14*drconstant);
+                    break;
+                case 16:
+                    entryList.get(pos).getDriver().addPoints(13*drconstant);
+                    break;
+                case 17:
+                    entryList.get(pos).getDriver().addPoints(12*drconstant);
+                    break;
+                case 18:
+                    entryList.get(pos).getDriver().addPoints(11*drconstant);
+                    break;
+                case 19:
+                    entryList.get(pos).getDriver().addPoints(10*drconstant);
+                    break;
+                case 20:
+                    entryList.get(pos).getDriver().addPoints(9*drconstant);
+                    break;
+                case 21:
+                    entryList.get(pos).getDriver().addPoints(8*drconstant);
+                    break;
+                case 22:
+                    entryList.get(pos).getDriver().addPoints(7*drconstant);
+                    break;
+                case 23:
+                    entryList.get(pos).getDriver().addPoints(6*drconstant);
+                    break;
+                default:
+                    entryList.get(pos).getDriver().addPoints(5*drconstant);
+                    break;
+            }
+            entryList.get(pos).endOfRaceReset();
+        }
+        entryList.get(mostLapsLedIndex).getDriver().addPoints(2);
     }
 
     public static void raceMenu(Scanner scan) {
@@ -302,38 +400,39 @@ public class Application {
         double speedcalc = 0;
         System.out.println(theRace.getRaceTitle() + " Qualifying Results");
         System.out.println("__________________________________");
-
-        for (int i = 0; i < activeDriverList.size(); i++) {
-            Driver theDriver = activeDriverList.get(i);
-            int inverseCon = 225 - theDriver.getConsistency();
+        createEntryList(theRace);
+        //use entry here and under
+        for (int i = 0; i < entryList.size(); i++) {
+            Car theCar = entryList.get(i);
+            int inverseCon = 225 - theCar.getDriver().getConsistency();
             double rand = Math.random() * inverseCon;
-            double aggBonus = Math.random() * (theDriver.getAggression() / 10);
+            double aggBonus = Math.random() * (theCar.getDriver().getAggression() / 10);
 
             if (theRace.getType().equals("RC") || theRace.getType().equals("Street")) {
-                speedcalc = theDriver.getRoad() - rand + aggBonus;
+                speedcalc = theCar.getDriver().getRoad() - rand + aggBonus;
             } else if (theRace.getType().equals("Oval")) {
-                speedcalc = theDriver.getOval() - rand + aggBonus;
+                speedcalc = theCar.getDriver().getOval() - rand + aggBonus;
             }
-            theDriver.setSpeed((int) speedcalc + 120);
-            activeDriverList.set(i, theDriver);
+            theCar.setSpeed((int) speedcalc + 120);
+            entryList.set(i, theCar);
         }
 
-        Collections.sort(activeDriverList);
+        Collections.sort(entryList);
         if(theRace.toString().equals("Indianapolis 500")){
             int j = 0;
             for (int i = 9; i > 0; i--) {
-                activeDriverList.get(j).addPoints(i);
+                entryList.get(j).getDriver().addPoints(i);
                 j++;
             }
         } else {
-            activeDriverList.get(0).addPoints(1);
+            entryList.get(0).getDriver().addPoints(1);
         }
-        activeDriverList.get(0).addPole();
+        entryList.get(0).getDriver().addPole();
 
-        for (int i = 0; i < activeDriverList.size(); i++) {
-            activeDriverList.get(i).setQualSpeed(activeDriverList.get(i).getSpeed());
+        for (int i = 0; i < entryList.size(); i++) {
+            entryList.get(i).setQualSpeed(entryList.get(i).getSpeed());
             String start = (i + 1) + ". ";
-            System.out.printf("%-30s %d\n", start + activeDriverList.get(i).getFirstName() + " " + activeDriverList.get(i).getLastName(), activeDriverList.get(i).getSpeed());
+            System.out.printf("%-30s %d\n", start + entryList.get(i).getDriver().getFirstName() + " " + entryList.get(i).getDriver().getLastName(), entryList.get(i).getSpeed());
 
         }
 
@@ -341,18 +440,21 @@ public class Application {
 
     }
 
-    public static double createSpeed(Driver theDriver, Race theRace) {
-        int speedConstant = 1800;
-        double ability = theDriver.getRaceAbility()*.75;//was without the *.75
-        double speedcalc = 0;
-        int inverseCon = 75 - (theDriver.getConsistency() / 4)+10; // was / 3 not 4
-        double rand = Math.random() * inverseCon;
-        double aggBonus = Math.random() * (theDriver.getAggression() / 10);
-        double noise = Math.random() * 125 + 75;
+    public static void doLap(Car theCar, Race theRace){
 
-        speedcalc = ability - rand + aggBonus + noise;
+
+    }
+
+    public static double createSpeed(Car theCar, Race theRace) {
+        int speedConstant = 1800;
+        double ability = theCar.getRaceAbility()*.75;//was without the *.75
+        int inverseCon = 75 - (theCar.getDriver().getConsistency() / 4)+10; // was / 3 not 4
+        double rand = Math.random() * inverseCon;
+        double aggBonus = Math.random() * (theCar.getDriver().getAggression() / 10);
+        double noise = Math.random() * 125 + 75;
+        double speedcalc = ability - rand + aggBonus + noise;
        // printSpeedCalc(theDriver, theDriver.getQualSpeed(), ability, rand, aggBonus, noise, speedcalc);
-        return speedcalc + theDriver.getSpeed() + speedConstant;
+        return speedcalc + theCar.getSpeed() + speedConstant;
 
     }
 
@@ -373,7 +475,7 @@ public class Application {
 
     //returns true if there is a crash on the lap, false if else
     public static boolean crash(int j, int likelihood, boolean crashOthers) {
-        double dnfTendency = ((double) activeDriverList.get(j).getDNFtendency() / 3) + 150;
+        double dnfTendency = ((double) entryList.get(j).getDriver().getDNFtendency() / 3) + 150;
         int newLikelihood = likelihood;
         if (crashOthers==true){
             //System.out.println("New Likelihood set to max");
@@ -390,14 +492,14 @@ public class Application {
             }
         }
         if (wrecked == true) {
-            System.out.println(activeDriverList.get(j).toString() + " HAS CRASHED");
+            System.out.println(entryList.get(j).getDriver().toString() + " HAS CRASHED");
             if (crashOthers==true){
-                System.out.println(activeDriverList.get(j).toString() + " was wrecked by the guy below");
+                System.out.println(entryList.get(j).getDriver().toString() + " was wrecked by the guy below");
             }
-            activeDriverList.get(j).setDnf(true);
+            entryList.get(j).getDriver().setDnf(true);
             crashOthers(j, likelihood, crashOthers);
-            activeDriverList.get(j).setSpeed(-1);
-            activeDriverList.get(j).addDnf();
+            entryList.get(j).setSpeed(-1);
+            entryList.get(j).getDriver().addDnf();
         }
         return wrecked;
     }
@@ -405,28 +507,28 @@ public class Application {
     public static void crashOthers(int i, int likelihood, boolean crashOthers){
         int j=i+1;
         if(i!=0 && crashOthers == false){//if driver i is not the leader, and you didn't already wreck the guy in front
-            if(activeDriverList.get(i-1).getSpeed()<=(activeDriverList.get(i).getSpeed()+150)) {
+            if(entryList.get(i-1).getSpeed()<=(entryList.get(i).getSpeed()+150)) {
                 //and is within 100 speed of guy in front
                 j = i - 1;
                 //try to wreck the guy in front! Wahoo
             }
         }
 
-        while(j<activeDriverList.size()&&j<=(i+3)){
-            Driver driver1 = activeDriverList.get(i);
-            Driver driver2 = activeDriverList.get(j);
+        while(j<entryList.size()&&j<=(i+3)){
+            Car car1 = entryList.get(i);
+            Car car2 = entryList.get(j);
             //while driver j (the maybe wreck driver) and only check 3 closest drivers
-            if(activeDriverList.get(j).isDnf()==false) {//don't crash more than once
+            if(entryList.get(j).getDriver().isDnf()==false) {//don't crash more than once
                 //System.out.println(driver1 + " speed <=  " + driver2 + " + 200: " + driver1.getSpeed() + " + " + (driver2.getSpeed() +200) + " = " + (driver1.getSpeed()<=(driver2.getSpeed()+200)));
                 //System.out.println(driver1 + " speed >= " + driver2 + " -200: " + driver1.getSpeed() + " + " + (driver2.getSpeed() -200) + " = " + (driver1.getSpeed()>=(driver2.getSpeed()-200)));
-                if((    driver1.getSpeed()<=(driver2.getSpeed()+200)&&
-                        driver1.getSpeed()>=(driver2.getSpeed()-200))||
-                        driver2.getSpeed()>=driver1.getSpeed()) {
+                if((    car1.getSpeed()<=(car2.getSpeed()+200)&&
+                        car1.getSpeed()>=(car2.getSpeed()-200))||
+                        car2.getSpeed()>=car1.getSpeed()) {
                     //System.out.println("There is a driver within 200");
                     //if driver speed is within 200 of wrecking guy see if they wreck! :)
                     boolean wreckedPeople = crash(j, likelihood, true);
                     if (wreckedPeople){
-                        System.out.println(activeDriverList.get(i));
+                        System.out.println(entryList.get(i));
                     }
                 }
             }
@@ -437,12 +539,12 @@ public class Application {
     public static int yellowLap(Race theRace, int lap, int cautionLaps){
         System.out.println("\nCAUTION Lap " + cautionLaps + " of 3");
         System.out.println("=======================");
-        int speed = activeDriverList.get(0).getSpeed()+2000;
+        int speed = entryList.get(0).getSpeed()+2000;
         int i = 0;
 
-        while(i<activeDriverList.size()&&activeDriverList.get(i).isDnf()==false){
+        while(i<entryList.size()&&entryList.get(i).getDriver().isDnf()==false){
             speed-=50;
-            activeDriverList.get(i).setSpeed(speed);
+            entryList.get(i).setSpeed(speed);
             i++;
         }
 
@@ -454,14 +556,12 @@ public class Application {
         waitForUser();
         int j = 0;
         //set race ability and set starting positions (50 "speed" from one another")
-        for (int i = activeDriverList.size() - 1; i >= 0; i--) {
-            activeDriverList.get(i).setRaceAbility(initRaceAbility(theRace, activeDriverList.get(i)));
-            activeDriverList.get(i).setSpeed(j);
+        for (int i = entryList.size() - 1; i >= 0; i--) {
+            entryList.get(i).setRaceAbility(initRaceAbility(theRace, entryList.get(i)));
+            entryList.get(i).setSpeed(j);
             j += 50;
         }
-
         int cautionLaps = 0;
-
         //go through all the laps
         for (int lap = 1; lap <= theRace.getLaps(); lap++) {
 
@@ -477,30 +577,31 @@ public class Application {
             endOfLap(theRace, lap);
         }
         //conclude race stats
-        System.out.println(raceWinner(activeDriverList.get(0), theRace));
-        activeDriverList.get(0).addWin();
+        System.out.println(raceWinner(entryList.get(0), theRace));
+        entryList.get(0).getDriver().addWin();
         for (int i = 0; i < 3; i++) {
-            activeDriverList.get(i).addPodium();
+            entryList.get(i).getDriver().addPodium();
         }
         indycar2018points(theRace);
         sortStandings();
-        if (mode == 1 && activeRaceList.get(activeRaceList.size() - 1).toString().equals(theRace.toString())) {
-            System.out.println(activeDriverList.get(0).toString() + " has won the Championship!");
-            activeDriverList.get(0).addChampionship();
+        if (mode == 1 && allTrackList.get(allTrackList.size() - 1).toString().equals(theRace.toString())) {
+            System.out.println(allDriverList.get(0).toString() + " has won the Championship!");
+            allDriverList.get(0).addChampionship();
         }
+        entryList.clear();
     }
 
     //returns number of caution laps
     public static int greenLap(Race theRace, int lap){
         int cautionLaps = 0;
-        for (int i = 0; i < activeDriverList.size(); i++) {
-            if (activeDriverList.get(i).isDnf()==false) {
-                double dspeed = createSpeed(activeDriverList.get(i), theRace);
-                activeDriverList.get(i).setSpeed((int) dspeed);
+        for (int i = 0; i < entryList.size(); i++) {
+            if (entryList.get(i).getDriver().isDnf()==false) {
+                double dspeed = createSpeed(entryList.get(i), theRace);
+                entryList.get(i).setSpeed((int) dspeed);
 
             }
         }
-        for (int i = 0; i < activeDriverList.size(); i++) {
+        for (int i = 0; i < entryList.size(); i++) {
             boolean isCaution = crash(i, 12, false);
             if(isCaution==true){
                 cautionLaps = 1;
@@ -510,8 +611,8 @@ public class Application {
     }
 
     public static void endOfLap(Race theRace, int lap){
-        Collections.sort(activeDriverList);
-        activeDriverList.get(0).incrementLapsLed();
+        Collections.sort(entryList);
+        entryList.get(0).getDriver().incrementLapsLed();
         printRaceOrder(theRace, lap);
     }
 
@@ -519,31 +620,33 @@ public class Application {
         System.out.println("\n" + theRace);
         System.out.println("Lap " + lap + " of " + theRace.getLaps());
         System.out.println("____________________________________");
-        for (int i = 0; i < activeDriverList.size(); i++) {
+        for (int i = 0; i < entryList.size(); i++) {
             String start = (i + 1) + ". ";
-            System.out.printf("%-30s %-5d %d\n", start + activeDriverList.get(i).getFirstName() + " " + activeDriverList.get(i).getLastName(), activeDriverList.get(i).getLapsLed(), activeDriverList.get(i).getSpeed());
+            System.out.printf("%-30s %-5d %d\n", start + entryList.get(i).getDriver().getFirstName() + " " +
+                    entryList.get(i).getDriver().getLastName(), entryList.get(i).getDriver().getLapsLed(), entryList.get(i).getSpeed());
         }
     }
 
-    public static int initRaceAbility(Race theRace, Driver theDriver){
-        int ability = theDriver.getSpeed() / 4;
-        double newConsistency = (double) theDriver.getConsistency() / 2 + 25;
+    public static int initRaceAbility(Race theRace, Car theCar){
+        int ability = theCar.getSpeed() / 4;
+        double newConsistency = (double) theCar.getDriver().getConsistency() / 2 + 25;
         double inverseCon = 100 - newConsistency;
         int subtract = (int) (Math.random() * inverseCon);
         if (theRace.getType().equals("Oval")) {
-            ability = theDriver.getOval();
+            ability = theCar.getDriver().getOval() + theCar.getOval();
         } else if (theRace.getType().equals("RC")) {
-            ability = theDriver.getRoad();
+            ability = theCar.getDriver().getRoad() + theCar.getRoad();
         } else if (theRace.getType().equals("Street")){
-            ability = theDriver.getStreet();
+            ability = (theCar.getDriver().getStreet() + theCar.getRoad());
         }
+        ability/=2;//because we're now adding driver and car ability..  so halve it
         int rand = (int) (Math.random() * 20);
         return(ability + rand - subtract);
     }
 
-    public static String raceWinner(Driver theDriver, Race theRace) {
+    public static String raceWinner(Car theCar, Race theRace) {
 
-        return theDriver.toString() + " has won the " + theRace.toString() + "!";
+        return theCar.getDriver().toString() + " has won the " + theRace.toString() + "!";
     }
 
     public static void existingDrivers() {
@@ -730,29 +833,41 @@ public class Application {
                 "United States", "Oregon", "Portland"));
         allTrackList.add(new Track("Sonoma Raceway", "RC", 2.385, 12,
                 "United States", "California", "Sonoma"));
+        allTrackList.add(new Track("Laguna Seca Raceway","RC",2.238,11,
+                "United States", "California","Monterey"));
 
 
-        activeRaceList.add(new Race(allTrackList.get(0), "Firestone Grand Prix of St. Petersburg", 110));
-        activeRaceList.add(new Race(allTrackList.get(1), "Desert Diamond Phoenix Grand Prix", 250));
-        activeRaceList.add(new Race(allTrackList.get(2), "Toyota Grand Prix of Long Beach", 85));
-        activeRaceList.add(new Race(allTrackList.get(3), "Honda Indy Grand Prix of Alabama", 90));
-        activeRaceList.add(new Race(allTrackList.get(4), "Indycar Grand Prix", 85));
-        activeRaceList.add(new Race(allTrackList.get(5), "Indianapolis 500", 200));
-        activeRaceList.get(5).setDoublePoints(true);
-        activeRaceList.add(new Race(allTrackList.get(6), "Chevrolet Dual in Detroit - Dual 1", 70));
-        activeRaceList.add(new Race(allTrackList.get(6), "Chevrolet Dual in Detroit - Dual 2", 70));
-        activeRaceList.add(new Race(allTrackList.get(7), "DXC Technology 600", 248));
-        activeRaceList.add(new Race(allTrackList.get(8), "Kohler Grand Prix", 55));
-        activeRaceList.add(new Race(allTrackList.get(9), "Iowa Corn 300", 300));
-        activeRaceList.add(new Race(allTrackList.get(10), "Honda Indy Toronto", 85));
-        activeRaceList.add(new Race(allTrackList.get(11), "Honda Indy 200 at Mid-Ohio", 90));
-        activeRaceList.add(new Race(allTrackList.get(12), "ABC Supply 500", 200));
-        activeRaceList.add(new Race(allTrackList.get(13), "Bommarito Automotive Group 500", 248));
-        activeRaceList.add(new Race(allTrackList.get(14), "Grand Prix of Portland", 100));
-        activeRaceList.add(new Race(allTrackList.get(15), "GoPro Grand Prix of Sonoma", 85));
-        activeRaceList.get(activeRaceList.size()-1).setDoublePoints(true);
+
+        setSchedule(2018);
 
 
+    }
+
+    public static void setSchedule(int year){
+        if(year==2018){
+            activeRaceList.add(new Race(allTrackList.get(0), "Firestone Grand Prix of St. Petersburg", 110, 4));
+            activeRaceList.add(new Race(allTrackList.get(1), "Desert Diamond Phoenix Grand Prix", 250, 2));
+            activeRaceList.add(new Race(allTrackList.get(2), "Toyota Grand Prix of Long Beach", 85,5));
+            activeRaceList.add(new Race(allTrackList.get(3), "Honda Indy Grand Prix of Alabama", 90,2));
+            activeRaceList.add(new Race(allTrackList.get(4), "Indycar Grand Prix", 85,4));
+            activeRaceList.add(new Race(allTrackList.get(5), "Indianapolis 500", 200,10));
+            activeRaceList.get(5).setDoublePoints(true);
+            activeRaceList.add(new Race(allTrackList.get(6), "Chevrolet Dual in Detroit - Dual 1", 70,3));
+            activeRaceList.add(new Race(allTrackList.get(6), "Chevrolet Dual in Detroit - Dual 2", 70,3));
+            activeRaceList.add(new Race(allTrackList.get(7), "DXC Technology 600", 248,4));
+            activeRaceList.add(new Race(allTrackList.get(8), "Kohler Grand Prix", 55,4));
+            activeRaceList.add(new Race(allTrackList.get(9), "Iowa Corn 300", 300,2));
+            activeRaceList.add(new Race(allTrackList.get(10), "Honda Indy Toronto", 85,3));
+            activeRaceList.add(new Race(allTrackList.get(11), "Honda Indy 200 at Mid-Ohio", 90,2));
+            activeRaceList.add(new Race(allTrackList.get(12), "ABC Supply 500", 200,2));
+            activeRaceList.add(new Race(allTrackList.get(13), "Bommarito Automotive Group 500", 248,2));
+            activeRaceList.add(new Race(allTrackList.get(14), "Grand Prix of Portland", 100,1));
+            activeRaceList.add(new Race(allTrackList.get(15), "GoPro Grand Prix of Sonoma", 85,4));
+            activeRaceList.get(activeRaceList.size()-1).setDoublePoints(true);
+        }
+        if(year==2019){
+
+        }
     }
 
     public static void existingManufacturers(){
@@ -765,8 +880,39 @@ public class Application {
         activeManufacturerList.add(allManufacturerList.get(1));
     }
 
-    public static void createEntry(int team, int driver, String num, int fullTime){
+    public static void createEntryList(Race theRace){
+        for (int i = 0; i < allCarList.size(); i++) {
+            Car theCar = allCarList.get(i);
 
+            if(theCar.getFullTime()==0){//full
+                entryList.add(theCar);
+            }
+            else if(theCar.getFullTime()==1){//half
+                if(theRace.getPrestige()>4) {
+                    entryList.add(theCar);//currently adds part time cars to prestigious races, later on maybe keep track
+                    //of how many races done and then randomize it a bit
+                }
+            }
+            else if(theCar.getFullTime()==2){//road/street
+                if(theRace.getType()!="Oval"){
+                    entryList.add(theCar);
+                }
+            }
+            else if(theCar.getFullTime()==3){//ovals
+                if(theRace.getType()=="Oval"){
+                    entryList.add(theCar);
+                }
+            }
+            else if(theCar.getFullTime()==4) {//May
+                if (theRace.getCity() == "Speedway") {
+                    entryList.add(theCar);
+                }
+            } else if (theCar.getFullTime() == 5) {
+                if(theRace.getName() == "Indianapolis 500") {
+                    entryList.add(theCar);
+                }
+            }
+        }
 
     }
 
@@ -775,7 +921,7 @@ public class Application {
         allTeamList.get(0).setAttributes(80, 70, 80);
         allCarList.add(allTeamList.get(0).createCar(allDriverList.get(15), "2", 0));
         //Newgarden 2
-        allCarList.add(allTeamList.get(0).createCar(allDriverList.get(9), "3", 2));
+        allCarList.add(allTeamList.get(0).createCar(allDriverList.get(9), "3", 4));
         //Castroneves 3
         allCarList.add(allTeamList.get(0).createCar(allDriverList.get(33), "12", 0));
         //Power 12
@@ -819,9 +965,9 @@ public class Application {
         //Bourdais 18
         allCarList.add(allTeamList.get(4).createCar(allDriverList.get(35), "19", 0));
         //de melo/fittipaldi 19
-        allCarList.add(allTeamList.get(4).createCar(allDriverList.get(3), "17", 3));
+        allCarList.add(allTeamList.get(4).createCar(allDriverList.get(3), "17", 5));
         //Daly 17
-        allCarList.add(allTeamList.get(4).createCar(allDriverList.get(21), "63", 3));
+        allCarList.add(allTeamList.get(4).createCar(allDriverList.get(21), "63", 5));
         //Pippa 63
 
         allTeamList.add(new Team("Schmidt Peterson Motorsports", activeManufacturerList.get(1)));
@@ -830,27 +976,27 @@ public class Application {
         //Hinch 5
         allCarList.add(allTeamList.get(5).createCar(allDriverList.get(22), "6", 0));
         //Wickens 6
-        allCarList.add(allTeamList.get(5).createCar(allDriverList.get(14), "7", 3));
+        allCarList.add(allTeamList.get(5).createCar(allDriverList.get(14), "7", 5));
         //Howard 7
-        allCarList.add(allTeamList.get(5).createCar(allDriverList.get(11), "60", 3));
+        allCarList.add(allTeamList.get(5).createCar(allDriverList.get(11), "60", 5));
         //Harvey 60
 
         allTeamList.add(new Team("Ed Carpenter Racing", activeManufacturerList.get(0)));
         allTeamList.get(6).setAttributes(60, 70, 60);
-        allCarList.add(allTeamList.get(6).createCar(allDriverList.get(4), "20", 1));
+        allCarList.add(allTeamList.get(6).createCar(allDriverList.get(4), "20", 3));//Ed
         //Carpenter/King 20
         allCarList.add(allTeamList.get(6).createCar(allDriverList.get(29), "21", 0));
         //Pigot 21
-        //allCarList.add(allTeamList.get(6).createCar(allDriverList.get(), "13", 3));
+        allCarList.add(allTeamList.get(6).createCar(allDriverList.get(37), "13", 5));
         //Danica 13
 
         allTeamList.add(new Team("A.J. Foyt Enterprises", activeManufacturerList.get(0)));
         allTeamList.get(0).setAttributes(55, 65, 60);
-        //allCarList.add(allTeamList.get(7).createCar(allDriverList.get(), "4", 0));
+        allCarList.add(allTeamList.get(7).createCar(allDriverList.get(41), "4", 0));
         //Leist 4
         allCarList.add(allTeamList.get(7).createCar(allDriverList.get(31), "14", 0));
         //Kanaan 14
-        allCarList.add(allTeamList.get(7).createCar(allDriverList.get(12), "33", 3));
+        allCarList.add(allTeamList.get(7).createCar(allDriverList.get(12), "33", 5));
         //Davison 33
 
         allTeamList.add(new Team("Harding Racing", activeManufacturerList.get(0)));
@@ -867,12 +1013,12 @@ public class Application {
 
         allTeamList.add(new Team("Juncos Racing", activeManufacturerList.get(0)));
         allTeamList.get(10).setAttributes(50, 50, 50);
-        //allCarList.add(allTeamList.get(10).createCar(allDriverList.get(), "32", 0));
+        allCarList.add(allTeamList.get(10).createCar(allDriverList.get(38), "32", 0));
         //32 Kaiser/Bender
 
         allTeamList.add(new Team("Dreyer & Reinbold Racing", activeManufacturerList.get(0)));
         allTeamList.get(11).setAttributes(50, 50, 50);
-        allCarList.add(allTeamList.get(11).createCar(allDriverList.get(24), "24", 3));
+        allCarList.add(allTeamList.get(11).createCar(allDriverList.get(24), "24", 1));
         //24 karam
 
 

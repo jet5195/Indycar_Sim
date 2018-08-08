@@ -7,12 +7,14 @@ public class Race {
     private double totalMiles;
     private boolean doublePoints = false;
     int laps;
+    private int prestige;//10 is best, most races will be under 5. ie indy 500 is 10, monaco is 10, daytona is 9,
 
-    public Race(Track track, String raceTitle, int laps) {
+    public Race(Track track, String raceTitle, int laps, int prestige) {
         this.raceTitle = raceTitle;
         this.laps = laps;
         this.totalMiles = laps * track.getMiles();
         this.track = track;
+        this.prestige = prestige;
     }
 
 
@@ -74,6 +76,14 @@ public class Race {
 
     public void setDoublePoints(boolean doublePoints) {
         this.doublePoints = doublePoints;
+    }
+
+    public int getPrestige() {
+        return prestige;
+    }
+
+    public void setPrestige(int prestige) {
+        this.prestige = prestige;
     }
 
     @Override

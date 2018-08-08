@@ -1,7 +1,7 @@
 /**
  * Created by xsc7043 on 9/22/2017.
  */
-public class Driver implements Comparable<Driver> {
+public class Driver {
     //forever stats
     private String firstName;
     private String lastName;
@@ -22,8 +22,8 @@ public class Driver implements Comparable<Driver> {
 
     //Race Stats
     private int raceAbility = 0;
-    private int qualSpeed;
-    private int speed;
+    //private int qualSpeed;
+    //private int speed;
     private int lapsLed = 0;
     private boolean dnf = false;
 
@@ -187,14 +187,6 @@ public class Driver implements Comparable<Driver> {
         this.age = age;
     }
 
-    public int getSpeed() {
-        return speed;
-    }
-
-    public void setSpeed(int speed) {
-        this.speed = speed;
-    }
-
     public int getLapsLed() {
         return lapsLed;
     }
@@ -203,6 +195,10 @@ public class Driver implements Comparable<Driver> {
         lapsLed++;
         seasonLapsLed++;
         careerLapsLed++;
+    }
+
+    public void resetLapsLed(){
+        this.lapsLed = 0;
     }
 
     public int getPoints() {
@@ -273,22 +269,6 @@ public class Driver implements Comparable<Driver> {
         return careerPoles;
     }
 
-    public int getQualSpeed() {
-        return qualSpeed;
-    }
-
-    public void setQualSpeed(int qualSpeed) {
-        this.qualSpeed = qualSpeed;
-    }
-
-    public int getRaceAbility() {
-        return raceAbility;
-    }
-
-    public void setRaceAbility(int raceAbility) {
-        this.raceAbility = raceAbility;
-    }
-
     public boolean isDnf() {
         return dnf;
     }
@@ -305,12 +285,7 @@ public class Driver implements Comparable<Driver> {
         return careerDnfs;
     }
 
-    public void endOfRaceReset() {
-        speed = 0;
-        lapsLed = 0;
-        raceAbility = 0;
-        dnf = false;
-    }
+
 
     public void endOfSeasonReset() {
         points = 0;
@@ -321,12 +296,11 @@ public class Driver implements Comparable<Driver> {
         seasonDnfs = 0;
     }
 
-
-    @Override
-    public int compareTo(Driver o) {
-        int compareSpeed = o.getSpeed();
-        return compareSpeed - this.speed;
-    }
+//    @Override
+//    public int compareTo(Driver o) {
+//        int compareSpeed = o.getSpeed();
+//       return compareSpeed - this.speed;
+//    }
 
     @Override
     public String toString() {

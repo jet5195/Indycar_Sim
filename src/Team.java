@@ -23,7 +23,7 @@ public class Team {
     }
 
     public Car createCar(Driver driver, String number, int fullTime){
-        Car newCar = new Car(driver, number, this.name, fullTime);
+        Car newCar = new Car(driver, number, this.name, fullTime, this.road, this.oval, this.pitCrew);
         return newCar;
     }
 
