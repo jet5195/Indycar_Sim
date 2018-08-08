@@ -151,6 +151,14 @@ public class Driver {
         this.aggression = aggression;
     }
 
+    public int getQualify() {
+        return qualify;
+    }
+
+    public void setQualify(int qualify) {
+        this.qualify = qualify;
+    }
+
     public int getOverall() {
         return overall;
     }
