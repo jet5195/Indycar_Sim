@@ -52,7 +52,6 @@ public class Track {
         this.miles = miles;
     }
 
-
     public int getTurns() {
         return turns;
     }
@@ -83,6 +82,25 @@ public class Track {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public double lapTime(){
+        double mph = 250;//lolz this is the average speed; maybe make it different for oval and rc/street
+        //mph-=5*theRace.getTurns();
+        if(this.getType()!="Oval"){
+            mph-=15*this.getMiles();
+            if (this.getType()=="Street"){
+                mph-=10;
+            }
+        }
+        double turnsMilesRatio = this.getTurns()/this.getMiles();
+        mph-=turnsMilesRatio*15;
+        double mps = mph/60/60;
+        double lapTime = this.getMiles()/mps;
+        //System.out.println(lapTime);
+        return lapTime;
+
+        //returns the fastest possible laptime for a track! Doesn't do too poorly
     }
 
 

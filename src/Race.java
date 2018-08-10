@@ -85,6 +85,9 @@ public class Race {
     public void setPrestige(int prestige) {
         this.prestige = prestige;
     }
+    public double getLapTime(){
+        return this.track.lapTime();
+    }
 
     @Override
     public String toString() {

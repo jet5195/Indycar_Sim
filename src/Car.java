@@ -1,23 +1,25 @@
 public class Car implements Comparable<Car>{
     private static int horsepower = 700;
     private static int torque = 500;
-    private static int mpg = 2;
+    private static double mpg = 1.98;
     private static double fuelCapacity = 18.5; //gallons
     private static int weight = 1600; //lbs
     private String number;
     private Driver driver;
     private String team;
-    private int fuel;
+    private double fuel;
     private int tireLife;
     private int tireAge;
+    private int tireType;
     private int lastPit;
     private int fullTime;//0 is full, 1 is half, 2 is road/street, 3 is just Ovals, 4 is just May, 5 is just Indy 500
     private int speed;
     private int qualSpeed;
-    private int raceAbility;
+    private double raceAbility;
     private int oval;
     private int road;
     private int pitCrew;
+    private int position;
 
     //inherit stuff from team and combine it with driver values to get race values! Use them here. Switch a lot
     //of stuff from the driver class to here that say whether or not a driver does well in a race
@@ -67,7 +69,7 @@ public class Car implements Comparable<Car>{
         return torque;
     }
 
-    public static int getMpg() {
+    public static double getMpg() {
         return mpg;
     }
 
@@ -103,20 +105,47 @@ public class Car implements Comparable<Car>{
         this.team = team;
     }
 
-    public int getFuel() {
+    public double getFuel() {
         return fuel;
     }
 
-    public void setFuel(int fuel) {
-        this.fuel = fuel;
+    public void addFuel(double fuel) {
+        if(fuel + this.fuel> fuelCapacity){
+            this.fuel = fuelCapacity;
+        }else {
+            this.fuel += fuel;
+        }
+    }
+
+    public void decreaseFuel(double miles, int mode){//mode 1 is caution, 2 is conserve, 3 is normal, 4 is push
+        double modeCoefficient = 0;
+        switch(mode){
+            case 1:
+                modeCoefficient = 2;
+                break;
+            case 2:
+                modeCoefficient = 1.25;
+                break;
+            case 3:
+                modeCoefficient = 1;
+                break;
+            case 4:
+                modeCoefficient = .75;
+                break;
+                default:
+        }
+        double currentMPG = modeCoefficient*this.mpg;
+        double fuelLost = miles/(currentMPG);
+        this.fuel-=fuelLost;
     }
 
     public int getTireLife() {
         return tireLife;
     }
 
-    public void setTireLife(int tireLife) {
-        this.tireLife = tireLife;
+    public void changeTires(int type) {//blacks are 1, reds 2, rain 3 lolz
+        tireLife = 100;
+        tireType = type;
     }
 
     public int getTireAge() {
@@ -159,11 +188,11 @@ public class Car implements Comparable<Car>{
         this.qualSpeed = qualSpeed;
     }
 
-    public int getRaceAbility() {
+    public double getRaceAbility() {
         return raceAbility;
     }
 
-    public void setRaceAbility(int raceAbility) {
+    public void setRaceAbility(double raceAbility) {
         this.raceAbility = raceAbility;
     }
 
@@ -172,6 +201,14 @@ public class Car implements Comparable<Car>{
         driver.resetLapsLed();
         raceAbility = 0;
         driver.setDnf(false);
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
     }
 
     @Override
