@@ -3,11 +3,12 @@ public class Car implements Comparable<Car>{
     private static int torque = 500;
     private static double mpg = 1.98;
     private static double fuelCapacity = 18.5; //gallons
-    private static int weight = 1600; //lbs
+    private static double weight = 1600; //lbs
     private String number;
     private Driver driver;
     private String team;
     private double fuel;
+    private static final double fuelWeight = 6.7; //lbs per gallon
     private int tireLife;
     private int tireAge;
     private int tireType;
@@ -77,7 +78,7 @@ public class Car implements Comparable<Car>{
         return fuelCapacity;
     }
 
-    public static int getWeight() {
+    public static double getWeight() {
         return weight;
     }
 
@@ -137,6 +138,7 @@ public class Car implements Comparable<Car>{
         double currentMPG = modeCoefficient*this.mpg;
         double fuelLost = miles/(currentMPG);
         this.fuel-=fuelLost;
+        this.weight-=(fuelLost*fuelWeight);
     }
 
     public int getTireLife() {

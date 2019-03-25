@@ -895,6 +895,8 @@ public class Application {
                 "Japan", "Tochegi", "Motegi"));
         allTrackList.add(new Track("New Hampshire Motor Speedway", "Oval", 1.025, 4,
                 "United States", "New Hampshire", "Loudon"));
+        allTrackList.add(new Track("Circuit of the Americas", "RC",  3.427, 20,
+                "United States", "Texas", "Austin"));
 
 
         setSchedule(year);
@@ -910,7 +912,7 @@ public class Application {
             activeRaceList.add(new Race(allTrackList.get(3), "Honda Indy Grand Prix of Alabama", 90, 2));
             activeRaceList.add(new Race(allTrackList.get(4), "Indycar Grand Prix", 85, 5));
             activeRaceList.add(new Race(allTrackList.get(5), "Indianapolis 500", 200, 10));
-            activeRaceList.get(5).setDoublePoints(true);
+            activeRaceList.get(activeRaceList.size() - 1).setDoublePoints(true);
             activeRaceList.add(new Race(allTrackList.get(6), "Chevrolet Dual in Detroit - Dual 1", 70, 4));
             activeRaceList.add(new Race(allTrackList.get(6), "Chevrolet Dual in Detroit - Dual 2", 70, 4));
             activeRaceList.add(new Race(allTrackList.get(7), "DXC Technology 600", 248, 5));
@@ -926,40 +928,38 @@ public class Application {
         }
         if (year == 2019) {
             activeRaceList.add(new Race(allTrackList.get(0), "Firestone Grand Prix of St. Petersburg", 110, 4));
-            activeRaceList.add(new Race(allTrackList.get(25), "Honda Grand Prix of Japan", 85, 4));
-            activeRaceList.add(new Race(allTrackList.get(23), "Milwaukee Indyfest", 250, 5));
-            activeRaceList.add(new Race(allTrackList.get(2), "Toyota Grand Prix of Long Beach", 85, 5));
+            activeRaceList.add(new Race(allTrackList.get(1), "Indycar Classic at COTA", 60, 3));
             activeRaceList.add(new Race(allTrackList.get(3), "Honda Indy Grand Prix of Alabama", 90, 2));
+            activeRaceList.add(new Race(allTrackList.get(2), "Acura Grand Prix of Long Beach", 85, 5));
             activeRaceList.add(new Race(allTrackList.get(4), "Indycar Grand Prix", 85, 5));
             activeRaceList.add(new Race(allTrackList.get(5), "Indianapolis 500", 200, 10));
-            activeRaceList.get(6).setDoublePoints(true);
+            activeRaceList.get(activeRaceList.size() - 1).setDoublePoints(true);
             activeRaceList.add(new Race(allTrackList.get(6), "Chevrolet Dual in Detroit - Dual 1", 70, 4));
             activeRaceList.add(new Race(allTrackList.get(6), "Chevrolet Dual in Detroit - Dual 2", 70, 4));
             activeRaceList.add(new Race(allTrackList.get(7), "DXC Technology 600", 248, 5));
-            activeRaceList.add(new Race(allTrackList.get(8), "Kohler Grand Prix", 55, 6));
-            activeRaceList.add(new Race(allTrackList.get(9), "Iowa Corn 300", 300, 2));
+            activeRaceList.add(new Race(allTrackList.get(8), "REV Group Grand Prix at Road America", 55, 6));
             activeRaceList.add(new Race(allTrackList.get(10), "Honda Indy Toronto", 85, 3));
+            activeRaceList.add(new Race(allTrackList.get(9), "Iowa 300", 300, 2));
             activeRaceList.add(new Race(allTrackList.get(11), "Honda Indy 200 at Mid-Ohio", 90, 2));
-            activeRaceList.add(new Race(allTrackList.get(26), "New England 200", 200, 2));
             activeRaceList.add(new Race(allTrackList.get(12), "ABC Supply 500", 200, 3));
             activeRaceList.add(new Race(allTrackList.get(13), "Bommarito Automotive Group 500", 248, 2));
             activeRaceList.add(new Race(allTrackList.get(14), "Grand Prix of Portland", 100, 1));
-            activeRaceList.add(new Race(allTrackList.get(16), "Monterey Indy Grand Prix", 100, 6));
+            activeRaceList.add(new Race(allTrackList.get(16), "Firestone Grand Prix of Monterey", 98, 6));
             activeRaceList.get(activeRaceList.size() - 1).setDoublePoints(true);
         }
         if (year==2020) {
             activeRaceList.add(new Race(allTrackList.get(0), "Firestone Grand Prix of St. Petersburg", 110, 4));
             activeRaceList.add(new Race(allTrackList.get(25), "Honda Grand Prix of Japan", 85, 4));
             activeRaceList.add(new Race(allTrackList.get(23), "Milwaukee Indyfest", 250, 5));
-            activeRaceList.add(new Race(allTrackList.get(2), "Toyota Grand Prix of Long Beach", 85, 5));
+            activeRaceList.add(new Race(allTrackList.get(2), "Acura Grand Prix of Long Beach", 85, 5));
             activeRaceList.add(new Race(allTrackList.get(3), "Honda Indy Grand Prix of Alabama", 90, 2));
             activeRaceList.add(new Race(allTrackList.get(4), "Indycar Grand Prix", 85, 5));
             activeRaceList.add(new Race(allTrackList.get(5), "Indianapolis 500", 200, 10));
-            activeRaceList.get(6).setDoublePoints(true);
+            activeRaceList.get(activeRaceList.size() - 1).setDoublePoints(true);
             activeRaceList.add(new Race(allTrackList.get(6), "Chevrolet Dual in Detroit - Dual 1", 70, 4));
             activeRaceList.add(new Race(allTrackList.get(6), "Chevrolet Dual in Detroit - Dual 2", 70, 4));
             activeRaceList.add(new Race(allTrackList.get(7), "DXC Technology 600", 248, 5));
-            activeRaceList.add(new Race(allTrackList.get(8), "Kohler Grand Prix", 55, 6));
+            activeRaceList.add(new Race(allTrackList.get(8), "REV Group Grand Prix at Road America", 55, 6));
             activeRaceList.add(new Race(allTrackList.get(9), "Iowa Corn 300", 300, 2));
             activeRaceList.add(new Race(allTrackList.get(10), "Honda Indy Toronto", 85, 3));
             activeRaceList.add(new Race(allTrackList.get(11), "Honda Indy 200 at Mid-Ohio", 90, 2));
@@ -967,7 +967,7 @@ public class Application {
             activeRaceList.add(new Race(allTrackList.get(12), "ABC Supply 500", 200, 3));
             activeRaceList.add(new Race(allTrackList.get(13), "Bommarito Automotive Group 500", 248, 2));
             activeRaceList.add(new Race(allTrackList.get(14), "Grand Prix of Portland", 100, 1));
-            activeRaceList.add(new Race(allTrackList.get(16), "Monterey Indy Grand Prix", 100, 6));
+            activeRaceList.add(new Race(allTrackList.get(16), "Monterey Indy Grand Prix", 98, 6));
             activeRaceList.get(activeRaceList.size() - 1).setDoublePoints(true);
         }
     }
@@ -1143,16 +1143,14 @@ public class Application {
 
             allTeamList.add(new Team("Andretti Autosport", activeManufacturerList.get(1)));
             allTeamList.get(2).setAttributes(75, 82, 75);
-            allCarList.add(allTeamList.get(2).createCar(allDriverList.get(44), "25", 5));
-            //Wilson 25
+            allCarList.add(allTeamList.get(2).createCar(allDriverList.get(3), "25", 5));
+            //Daly 25
             allCarList.add(allTeamList.get(2).createCar(allDriverList.get(34), "26", 0));
             //Veach 26
             allCarList.add(allTeamList.get(2).createCar(allDriverList.get(0), "27", 0));
             //Rossi 27
             allCarList.add(allTeamList.get(2).createCar(allDriverList.get(23), "28", 0));
             //Hunter-Reay 28
-            //allCarList.add(allTeamList.get(2).createCar(allDriverList.get(47), "29", 4));
-            //O'Ward 29
             allCarList.add(allTeamList.get(2).createCar(allDriverList.get(17), "98", 0));
             //Marco 98
 
@@ -1162,30 +1160,26 @@ public class Application {
             //Rahal 15
             allCarList.add(allTeamList.get(3).createCar(allDriverList.get(30), "30", 0));
             //Sato 30
-            allCarList.add(allTeamList.get(3).createCar(allDriverList.get(20), "64", 5));
-            //Servia 64
+            allCarList.add(allTeamList.get(3).createCar(allDriverList.get(46), "42", 5));
+            //King 42
 
             allTeamList.add(new Team("Dale Coyne Racing", activeManufacturerList.get(1)));
             allTeamList.get(4).setAttributes(70, 55, 70);
             allCarList.add(allTeamList.get(4).createCar(allDriverList.get(26), "18", 0));
             //Bourdais 18
-            allCarList.add(allTeamList.get(4).createCar(allDriverList.get(40), "19", 0));
-            //Fittipaldi 19
-            allCarList.add(allTeamList.get(4).createCar(allDriverList.get(39), "17", 1));
-            //Urrutia 17
-            allCarList.add(allTeamList.get(4).createCar(allDriverList.get(21), "63", 5));
-            //Pippa 63
+            allCarList.add(allTeamList.get(4).createCar(allDriverList.get(50), "19", 0));
+            //Ferrucci 19
+            allCarList.add(allTeamList.get(4).createCar(allDriverList.get(12), "33", 5));
+            //Davison 33
 
-            allTeamList.add(new Team("Schmidt Peterson Motorsports", activeManufacturerList.get(1)));
+            allTeamList.add(new Team("Arrow Schmidt Peterson Motorsports", activeManufacturerList.get(1)));
             allTeamList.get(5).setAttributes(74, 78, 70);
             allCarList.add(allTeamList.get(5).createCar(allDriverList.get(13), "5", 0));
             //Hinch 5
             //allCarList.add(allTeamList.get(5).createCar(allDriverList.get(22), "6", 0));
             //Wickens
-            allCarList.add(allTeamList.get(5).createCar(allDriverList.get(1), "6", 0));
-            //Munoz 6
-            allCarList.add(allTeamList.get(5).createCar(allDriverList.get(14), "7", 5));
-            //Howard 7
+            allCarList.add(allTeamList.get(5).createCar(allDriverList.get(67), "7", 0));
+            //Ericsson 7
             allCarList.add(allTeamList.get(5).createCar(allDriverList.get(11), "60", 1));
             //Harvey 60
 
@@ -1193,13 +1187,12 @@ public class Application {
             allTeamList.get(6).setAttributes(63, 75, 65);
             allCarList.add(allTeamList.get(6).createCar(allDriverList.get(4), "20", 3));
             //Carpenter 20
-            allCarList.add(allTeamList.get(6).createCar(allDriverList.get(46), "20", 2));
-            //King 20
-            //allCarList.add(allTeamList.get(6).createCar(allDriverList.get(46), "20", 0));
-            //King 20
+            allCarList.add(allTeamList.get(6).createCar(allDriverList.get(5), "20", 2));
+            //Jones 20
             allCarList.add(allTeamList.get(6).createCar(allDriverList.get(29), "21", 0));
             //Pigot 21
-
+            allCarList.add(allTeamList.get(6).createCar(allDriverList.get(5), "64", 5));
+            //Jones 63 Indy only
 
             allTeamList.add(new Team("A.J. Foyt Enterprises", activeManufacturerList.get(0)));
             allTeamList.get(7).setAttributes(64, 69, 60);
@@ -1207,52 +1200,51 @@ public class Application {
             //Leist 4
             allCarList.add(allTeamList.get(7).createCar(allDriverList.get(31), "14", 0));
             //Kanaan 14
-            allCarList.add(allTeamList.get(7).createCar(allDriverList.get(12), "33", 5));
-            //Davison 33
 
-            allTeamList.add(new Team("Harding Racing", activeManufacturerList.get(0)));
+            allTeamList.add(new Team("Harding Steinbrenner Racing", activeManufacturerList.get(0)));
             allTeamList.get(8).setAttributes(65, 69, 50);
             allCarList.add(allTeamList.get(8).createCar(allDriverList.get(48), "88", 0));
             //88 Herta
-            allCarList.add(allTeamList.get(8).createCar(allDriverList.get(47), "8", 0));
-            //8 O'Ward
+            /*allCarList.add(allTeamList.get(8).createCar(allDriverList.get(TBA), "8", 0));
+            //8 TBA*/
 
             allTeamList.add(new Team("Carlin", activeManufacturerList.get(0)));
             allTeamList.get(9).setAttributes(64, 60, 55);
-            allCarList.add(allTeamList.get(9).createCar(allDriverList.get(2), "23", 0));
+            allCarList.add(allTeamList.get(9).createCar(allDriverList.get(2), "23", 1));
             //23 Kimball
+            allCarList.add(allTeamList.get(9).createCar(allDriverList.get(47), "31", 1));
+            //37 O'Ward
             allCarList.add(allTeamList.get(9).createCar(allDriverList.get(18), "59", 0));
             //59 Chilton
-            allCarList.add(allTeamList.get(9).createCar(allDriverList.get(5), "37", 0));
-            //37 Jones
 
             allTeamList.add(new Team("Juncos Racing", activeManufacturerList.get(0)));
             allTeamList.get(10).setAttributes(50, 50, 50);
             allCarList.add(allTeamList.get(10).createCar(allDriverList.get(38), "32", 0));
-            //32 Kaiser/Bender
+            //32 Kaiser
+/*            allCarList.add(allTeamList.get(10).createCar(allDriverList.get(TBA), "TBA", 0));
+            //TBA TBA*/
 
             allTeamList.add(new Team("Dreyer & Reinbold Racing", activeManufacturerList.get(0)));
             allTeamList.get(11).setAttributes(45, 50, 40);
-            allCarList.add(allTeamList.get(11).createCar(allDriverList.get(24), "24", 1));
+            allCarList.add(allTeamList.get(11).createCar(allDriverList.get(24), "24", 5));
             //24 karam
 
-            allTeamList.add(new Team("McLaren-Andretti", activeManufacturerList.get(0)));
+            allTeamList.add(new Team("McLaren Racing", activeManufacturerList.get(0)));
             allTeamList.get(12).setAttributes(78, 80, 75);
-            allCarList.add(allTeamList.get(12).createCar(allDriverList.get(51), "41", 5));
-            //41 Alonso
-            allCarList.add(allTeamList.get(12).createCar(allDriverList.get(10), "42", 5));
-            //42 Hildebrand
+            allCarList.add(allTeamList.get(12).createCar(allDriverList.get(51), "66", 5));
+            //66 Alonso
 
-            allTeamList.add(new Team("Boleyn Racing", activeManufacturerList.get(1)));
-            allTeamList.get(13).setAttributes(62, 65, 70);
-            allCarList.add(allTeamList.get(13).createCar(allDriverList.get(19), "90", 0));
-            //Aleshin
-            allCarList.add(allTeamList.get(13).createCar(allDriverList.get(3), "95", 0));
-            //Daly
-            allCarList.add(allTeamList.get(13).createCar(allDriverList.get(6), "91", 2));
-            //Gutierrez
-            allCarList.add(allTeamList.get(13).createCar(allDriverList.get(27), "91", 3));
-            //saavedra
+            allTeamList.add(new Team("Clauson-Marshall Racing", activeManufacturerList.get(0)));
+            allTeamList.get(13).setAttributes(45,45,45);
+            allCarList.add(allTeamList.get(13).createCar(allDriverList.get(21), "39", 5));
+            //49 Mann
+
+            allTeamList.add(new Team("DragonSpeed", activeManufacturerList.get(0)));
+            allTeamList.get(13).setAttributes(45,45,45);
+            allCarList.add(allTeamList.get(13).createCar(allDriverList.get(54), "81", 1));
+            //81 Hanley
+
+
         } else if (year == 2020) {
             allTeamList.add(new Team("Team Penske", activeManufacturerList.get(0)));
             allTeamList.get(0).setAttributes(79, 76, 82);
