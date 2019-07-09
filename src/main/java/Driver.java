@@ -10,7 +10,8 @@ public class Driver {
     private int qualify;
     private int street;
     private int road;
-    private int oval;
+    private int smallOval;
+    private int largeOval;
     private int consistency;
     private int aggression;
     private int overall;
@@ -18,7 +19,7 @@ public class Driver {
     private int workEthic;
     private int DNFtendency;
     private int age;
-    private int specialist;//0 means no, 1 means oval, 2 means road/street
+    private int specialist;//0 means no, 1 means smallOval, 2 means road/street
 
     //Race Stats
     private int raceAbility = 0;
@@ -58,13 +59,14 @@ public class Driver {
         this.nationality = nationality;
     }
 
-    public void setAttributes(int marketablity, int qualify, int street, int road, int oval, int consistency,
-                              int aggression, int potential, int workEthic) {
+    public void setAttributes(int marketablity, int qualify, int street, int road, int smallOval,
+                              int largeOval, int consistency, int aggression, int potential, int workEthic) {
         this.marketability = marketablity;
         this.qualify = qualify;
         this.street = street;
         this.road = road;
-        this.oval = oval;
+        this.smallOval = smallOval;
+        this.largeOval = largeOval;
         this.consistency = consistency;
         this.aggression = aggression;
         this.potential = potential;
@@ -77,9 +79,9 @@ public class Driver {
     }
 
     public void setSpecialist(){
-        if (oval>(1.75*road)&&oval>(1.75*street)){
+        if (smallOval >(1.75*road)&& smallOval >(1.75*street)){
             specialist =1;
-        } else if(road>(oval*1.75)&&street>(oval*1.75)){
+        } else if(road>(smallOval *1.75)&&street>(smallOval *1.75)){
             specialist = 2;
         } else{
             specialist = 0;
@@ -134,12 +136,20 @@ public class Driver {
         this.road = road;
     }
 
-    public int getOval() {
-        return oval;
+    public int getSmallOval() {
+        return smallOval;
     }
 
-    public void setOval(int oval) {
-        this.oval = oval;
+    public void setSmallOval(int smallOval) {
+        this.smallOval = smallOval;
+    }
+
+    public int getLargeOval() {
+        return largeOval;
+    }
+
+    public void setLargeOval(int largeOval) {
+        this.largeOval = largeOval;
     }
 
     public int getConsistency() {

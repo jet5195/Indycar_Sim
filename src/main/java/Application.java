@@ -20,7 +20,7 @@ public class Application {
     static List<Manufacturer> activeManufacturerList = new ArrayList();
     static List<Car> possibleEntries = new ArrayList();
     static List<Car> entryList = new ArrayList();
-    static int year = 2018;
+    static int year = 2019;
     static int wait = 3;//1 is per lap, 2 is stop for caution, 3 is per race, 4 is per season
 
     public static void main(String[] args) throws IOException, GeneralSecurityException {
@@ -411,7 +411,7 @@ public class Application {
 //            if (theRace.getType().equals("RC") || theRace.getType().equals("Street")) {
 //                speedcalc = theCar.getDriver().getRoad() - rand + aggBonus;
 //            } else if (theRace.getType().equals("Oval")) {
-//                speedcalc = theCar.getDriver().getOval() - rand + aggBonus;
+//                speedcalc = theCar.getDriver().getSmallOval() - rand + aggBonus;
 //            }
 //            theCar.setSpeed((int) speedcalc + 120);
             double qualSpeed = 0;
@@ -699,7 +699,7 @@ public class Application {
         double inverseCon = 100 - newConsistency;
         int subtract = (int) (Math.random() * inverseCon);
         if (theRace.getType().equals("Oval")) {
-            ability = theCar.getDriver().getOval() + .75 * theCar.getOval();
+            ability = theCar.getDriver().getSmallOval() + .75 * theCar.getOval();
         } else if (theRace.getType().equals("RC")) {
             ability = theCar.getDriver().getRoad() + .75 * theCar.getRoad();
         } else if (theRace.getType().equals("Street")) {
@@ -715,7 +715,7 @@ public class Application {
         return theCar.getDriver().toString() + " has won the " + theRace.toString() + "!";
     }
 
-    public static void existingDrivers() {
+/*    public static void existingDrivers() {
         allDriverList.add(new Driver("Alexander", "Rossi", "USA", 25));
         allDriverList.get(0).setAttributes(70, 76, 81, 86, 74, 74, 77, 90, 82);
         allDriverList.add(new Driver("Carlos", "Munoz", "Columbia", 25));
@@ -820,9 +820,9 @@ public class Application {
         allDriverList.get(50).setAttributes(78, 68, 64, 65, 40, 45, 82, 68, 46);
         allDriverList.add(new Driver("Fernando", "Alonso", "Spain", 1981));
         allDriverList.get(51).setAttributes(88, 83, 79, 88, 72, 86, 66, 90, 83);
-    }
+    }*/
 
-    public static void testCars() {
+/*    public static void testCars() {
         allDriverList.add(new Driver("Bad", "Driver", "USA", 1990));
         allDriverList.get(allDriverList.size() - 1).setAttributes(50, 50, 50, 50, 50, 50, 50, 50, 50);
         allDriverList.add(new Driver("Average", "Driver", "USA", 1990));
@@ -838,7 +838,7 @@ public class Application {
         allTeamList.add(new Team("Bad Team", allManufacturerList.get(0)));
         allTeamList.get(allTeamList.size() - 1).setAttributes(80, 80, 80);
         allCarList.add(allTeamList.get(allTeamList.size() - 1).createCar(allDriverList.get(49), "97", 0));
-    }
+    }*/
 
     public static void existingTracks() {
         allTrackList.add(new Track("Streets of St. Petersburg", "Street", 1.8, 14,

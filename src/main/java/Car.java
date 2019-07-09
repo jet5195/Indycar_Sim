@@ -213,7 +213,7 @@ public class Car implements Comparable<Car>{
         this.position = position;
     }
 
-    @Override
+    //@Override
     public int compareTo(Car o) {
         int compareSpeed = o.getSpeed();
         return compareSpeed - this.speed;
