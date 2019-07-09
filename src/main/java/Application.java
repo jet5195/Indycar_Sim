@@ -975,9 +975,9 @@ public class Application {
     public static void existingManufacturers() {
         allManufacturerList.add(new Manufacturer("Chevrolet"));
         allManufacturerList.add(new Manufacturer("Honda"));
-        allManufacturerList.add(new Manufacturer("Alfa-Romeo"));
-        allManufacturerList.get(0).setAttributes(65, 65, 80);
-        allManufacturerList.get(1).setAttributes(75, 75, 65);
+        //allManufacturerList.add(new Manufacturer("Alfa-Romeo"));
+        allManufacturerList.get(0).setAttributes(80, 65, 80);
+        allManufacturerList.get(1).setAttributes(70, 75, 75);
         activeManufacturerList.add(allManufacturerList.get(0));
         activeManufacturerList.add(allManufacturerList.get(1));
     }
@@ -1235,14 +1235,17 @@ public class Application {
             //66 Alonso
 
             allTeamList.add(new Team("Clauson-Marshall Racing", activeManufacturerList.get(0)));
-            allTeamList.get(13).setAttributes(45,45,45);
+            allTeamList.get(13).setAttributes(45, 45, 45);
             allCarList.add(allTeamList.get(13).createCar(allDriverList.get(21), "39", 5));
             //49 Mann
 
             allTeamList.add(new Team("DragonSpeed", activeManufacturerList.get(0)));
-            allTeamList.get(13).setAttributes(45,45,45);
+            allTeamList.get(13).setAttributes(45, 45, 45);
             allCarList.add(allTeamList.get(13).createCar(allDriverList.get(54), "81", 1));
             //81 Hanley
+
+        } else if(year == 3232) {
+            allTeamList = SheetsQuickstart.getTeams("2019");
 
 
         } else if (year == 2020) {

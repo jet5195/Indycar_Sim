@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.security.GeneralSecurityException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -75,15 +76,63 @@ public class SheetsQuickstart {
         if (values == null || values.isEmpty()) {
             System.out.println("No data found.");
         } else {
-            //System.out.println("Name, Major");
             for (List row : values) {
-                Driver newDriver = new Driver((String) row.get(0), (String) row.get(1), (String) row.get(3), (String) row.get(4));
-                newDriver.setAttributes(Integer.parseInt(row.get(5).toString()), Integer.parseInt(row.get(6).toString()),
-                        Integer.parseInt(row.get(7).toString()), Integer.parseInt(row.get(8).toString()),
-                        Integer.parseInt(row.get(9).toString()), Integer.parseInt(row.get(10).toString()),
-                        Integer.parseInt(row.get(11).toString()), Integer.parseInt(row.get(12).toString()), Integer.parseInt(row.get(13).toString()));
-                driverList.add(newDriver);
+                if (!row.get(0).toString().equals("")) {
+                    Driver newDriver = new Driver(row.get(0).toString(), row.get(1).toString(), row.get(3).toString(), row.get(4).toString());
+                    newDriver.setAttributes(Integer.parseInt(row.get(5).toString()), Integer.parseInt(row.get(6).toString()),
+                            Integer.parseInt(row.get(7).toString()), Integer.parseInt(row.get(8).toString()),
+                            Integer.parseInt(row.get(9).toString()), Integer.parseInt(row.get(10).toString()),
+                            Integer.parseInt(row.get(11).toString()), Integer.parseInt(row.get(12).toString()), Integer.parseInt(row.get(13).toString()));
+                    driverList.add(newDriver);
+                }
             }
         }
+    }
+
+    public static void getTrackList(List<Track> trackList) throws IOException, GeneralSecurityException {
+        List<List<Object>> values = initialCall("Tracks");
+        values.remove(0);
+        if (values == null || values.isEmpty()) {
+            System.out.println("No data found.");
+        } else {
+            //System.out.println("Name, Major");
+            for (List row : values) {
+                if(!row.get(0).toString().equals("")) {
+                    Track newTrack = new Track(row.get(0).toString(), row.get(2).toString(), Double.parseDouble(row.get(3).toString()),
+                            Integer.parseInt(row.get(4).toString()), row.get(5).toString(), row.get(6).toString(), row.get(7).toString());
+                    trackList.add(newTrack);
+                }
+            }
+        }
+    }
+
+    public static List<Team> getTeams(String year){
+        List<Team> teamList = new ArrayList<Team>();
+        List<List<Object>> values = null;
+        try {
+            values = initialCall("Team" + year );
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (GeneralSecurityException e) {
+            e.printStackTrace();
+        }
+        values.remove(0);
+        if (values == null || values.isEmpty()) {
+            System.out.println("No data found.");
+        } else {
+            for (List row : values) {
+                if (!row.get(0).toString().equals("")) {
+                    Driver newDriver = new Driver(row.get(0).toString(), row.get(1).toString(), row.get(3).toString(), row.get(4).toString());
+                    newDriver.setAttributes(Integer.parseInt(row.get(5).toString()), Integer.parseInt(row.get(6).toString()),
+                            Integer.parseInt(row.get(7).toString()), Integer.parseInt(row.get(8).toString()),
+                            Integer.parseInt(row.get(9).toString()), Integer.parseInt(row.get(10).toString()),
+                            Integer.parseInt(row.get(11).toString()), Integer.parseInt(row.get(12).toString()), Integer.parseInt(row.get(13).toString()));
+                    driverList.add(newDriver);
+
+                    Team newTeam = new Team(row.get(0).toString(),)
+                }
+            }
+        }
+
     }
 }
