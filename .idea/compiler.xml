@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="11">
-      <module name="Indycar_Sim" target="1.5" />
+      <module name="Indycar_Sim" target="10" />
     </bytecodeTargetLevel>
   </component>
 </project>

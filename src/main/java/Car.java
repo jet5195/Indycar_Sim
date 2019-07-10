@@ -17,8 +17,10 @@ public class Car implements Comparable<Car>{
     private int speed;
     private int qualSpeed;
     private double raceAbility;
-    private int oval;
+    private int smallOval;
+    private int largeOval;
     private int road;
+    private int street;
     private int pitCrew;
     private int position;
 
@@ -28,22 +30,40 @@ public class Car implements Comparable<Car>{
     //instead of the team keeping track of its cars?
 
 
-    public Car(Driver driver, String number, String team, int fullTime, int oval, int road, int pitCrew){
+    public Car(Driver driver, String number, String team, int fullTime, int smallOval, int largeOval, int road, int street, int pitCrew){
         this.driver = driver;
         this.number = number;
         this.team = team;
         this.fullTime = fullTime;
-        this.oval = oval;
+        this.smallOval = smallOval;
+        this.largeOval = largeOval;
         this.road = road;
+        this.street = street;
         this.pitCrew = pitCrew;
     }
 
-    public int getOval() {
-        return oval;
+    public int getSmallOval() {
+        return smallOval;
     }
 
-    public void setOval(int oval) {
-        this.oval = oval;
+    public void setSmallOval(int smallOval) {
+        this.smallOval = smallOval;
+    }
+
+    public int getLargeOval() {
+        return largeOval;
+    }
+
+    public void setLargeOval(int largeOval) {
+        this.largeOval = largeOval;
+    }
+
+    public int getStreet() {
+        return street;
+    }
+
+    public void setStreet(int street) {
+        this.street = street;
     }
 
     public int getRoad() {

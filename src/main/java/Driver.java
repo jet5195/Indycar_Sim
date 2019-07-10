@@ -79,9 +79,10 @@ public class Driver {
     }
 
     public void setSpecialist(){
-        if (smallOval >(1.75*road)&& smallOval >(1.75*street)){
+        int avgOval = (smallOval+largeOval)/2;
+        if (avgOval >(1.75*road)&& avgOval >(1.75*street)){
             specialist =1;
-        } else if(road>(smallOval *1.75)&&street>(smallOval *1.75)){
+        } else if(road>(avgOval *1.75)&&street>(avgOval *1.75)){
             specialist = 2;
         } else{
             specialist = 0;

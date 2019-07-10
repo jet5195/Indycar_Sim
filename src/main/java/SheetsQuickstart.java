@@ -107,11 +107,11 @@ public class SheetsQuickstart {
         }
     }
 
-    public static List<Team> getTeams(String year){
-        List<Team> teamList = new ArrayList<Team>();
+    public static List<Engine> getEngineList() throws IOException, GeneralSecurityException {
+        List<Engine> engineList = new ArrayList<Engine>();
         List<List<Object>> values = null;
         try {
-            values = initialCall("Team" + year );
+            values = initialCall("Engines");
         } catch (IOException e) {
             e.printStackTrace();
         } catch (GeneralSecurityException e) {
@@ -123,17 +123,98 @@ public class SheetsQuickstart {
         } else {
             for (List row : values) {
                 if (!row.get(0).toString().equals("")) {
-                    /*Driver newDriver = new Driver(row.get(0).toString(), row.get(1).toString(), row.get(3).toString(), row.get(4).toString());
-                    newDriver.setAttributes(Integer.parseInt(row.get(5).toString()), Integer.parseInt(row.get(6).toString()),
-                            Integer.parseInt(row.get(7).toString()), Integer.parseInt(row.get(8).toString()),
-                            Integer.parseInt(row.get(9).toString()), Integer.parseInt(row.get(10).toString()),
-                            Integer.parseInt(row.get(11).toString()), Integer.parseInt(row.get(12).toString()), Integer.parseInt(row.get(13).toString()));*/
-                    //driverList.add(newDriver);
-
-                    //Team newTeam = new Team(row.get(0).toString(),)
+                    engineList.add(new Engine(Integer.parseInt(row.get(0).toString()), row.get(1).toString()));
                 }
             }
         }
-        return null;
+        return engineList;
+    }
+
+    public static List<Engine> setEngineStatsByYear(List<Engine> engineList, int year) throws IOException, GeneralSecurityException {
+        List<Engine> activeEngineList =  List.copyOf(engineList);
+        List<List<Object>> values = null;
+        try {
+            values = initialCall("Engines " + year);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (GeneralSecurityException e) {
+            e.printStackTrace();
+        }
+        values.remove(0);
+        if (values == null || values.isEmpty()) {
+            System.out.println("No data found.");
+        } else {
+            for (List row : values) {
+                if (!row.get(0).toString().equals("")) {
+                    if (row.get(2).toString().equals("TRUE")){
+                        engineList.get(Integer.parseInt(row.get(0).toString())).setAttributes(true,
+                                Integer.parseInt(row.get(3).toString()), Integer.parseInt(row.get(4).toString()),
+                                Integer.parseInt(row.get(5).toString()));
+                    }
+                    else {
+                        activeEngineList.get(Integer.parseInt(row.get(0).toString())).setAttributes(false, 0, 0, 0);
+                    }
+                }
+            }
+        }
+        return activeEngineList;
+    }
+
+
+    public static List<Team> getTeamList(){
+        List<Team> teamList = new ArrayList<Team>();
+        List<List<Object>> values = null;
+        try {
+            values = initialCall("Teams");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (GeneralSecurityException e) {
+            e.printStackTrace();
+        }
+        values.remove(0);
+        if (values == null || values.isEmpty()) {
+            System.out.println("No data found.");
+        } else {
+            for (List row : values) {
+                if (!row.get(0).toString().equals("")) {
+                    teamList.add(new Team(row.get(0).toString(), row.get(2).toString()));
+                }
+            }
+        }
+        return teamList;
+    }
+
+    public static void setTeamStatsByYear(List<Team> teamList, int year, List<Engine> engineList) throws IOException, GeneralSecurityException {
+        List<List<Object>> values = null;
+        try {
+            values = initialCall("Teams " + year);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (GeneralSecurityException e) {
+            e.printStackTrace();
+        }
+        values.remove(0);
+        if (values == null || values.isEmpty()) {
+            System.out.println("No data found.");
+        } else {
+            for (List row : values) {
+                if (!row.get(0).toString().equals("")) {
+                    if (row.get(3).toString().equals("TRUE")){
+                        Engine theEngine = engineList.stream()
+                                .filter(engine -> row.get(4).toString().equals(engine.getName()))
+                                .findAny()
+                                .orElse(null);
+                        teamList.get(Integer.parseInt(row.get(1).toString())).setAttributes(true,
+                                theEngine, Integer.parseInt(row.get(5).toString()),
+                                Integer.parseInt(row.get(6).toString()), Integer.parseInt(row.get(7).toString()),
+                                Integer.parseInt(row.get(8).toString()), Integer.parseInt(row.get(9).toString()),
+                                Integer.parseInt(row.get(10).toString()));
+                    }
+                    else {
+                        teamList.get(Integer.parseInt(row.get(1).toString())).setAttributes(false, null, 0, 0, 0, 0, 0, 0);
+                    }
+                }
+            }
+        }
     }
 }
