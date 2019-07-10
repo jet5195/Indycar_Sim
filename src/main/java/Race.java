@@ -46,7 +46,7 @@ public class Race {
         return track.getName();
     }
 
-    public String getType() {
+    public TrackType getType() {
         return track.getType();
     }
 

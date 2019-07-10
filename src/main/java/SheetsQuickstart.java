@@ -99,7 +99,7 @@ public class SheetsQuickstart {
             //System.out.println("Name, Major");
             for (List row : values) {
                 if(!row.get(0).toString().equals("")) {
-                    Track newTrack = new Track(row.get(0).toString(), row.get(2).toString(), Double.parseDouble(row.get(3).toString()),
+                    Track newTrack = new Track(row.get(0).toString(), TrackType.valueOf(row.get(2).toString()), Double.parseDouble(row.get(3).toString()),
                             Integer.parseInt(row.get(4).toString()), row.get(5).toString(), row.get(6).toString(), row.get(7).toString());
                     trackList.add(newTrack);
                 }

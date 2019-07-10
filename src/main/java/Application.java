@@ -408,9 +408,9 @@ public class Application {
 //            double rand = Math.random() * inverseCon;
 //            double aggBonus = Math.random() * (theCar.getDriver().getAggression() / 10);
 //
-//            if (theRace.getType().equals("RC") || theRace.getType().equals("Street")) {
+//            if (theRace.getType().equals(TrackType.ROAD_COURSE) || theRace.getType().equals(TrackType.ROAD_COURSE)) {
 //                speedcalc = theCar.getDriver().getRoad() - rand + aggBonus;
-//            } else if (theRace.getType().equals("Oval")) {
+//            } else if (theRace.getType().equals(TrackType.LARGE_OVAL)) {
 //                speedcalc = theCar.getDriver().getSmallOval() - rand + aggBonus;
 //            }
 //            theCar.setSpeed((int) speedcalc + 120);
@@ -698,11 +698,11 @@ public class Application {
         double newConsistency = (double) theCar.getDriver().getConsistency() / 2 + 25;
         double inverseCon = 100 - newConsistency;
         int subtract = (int) (Math.random() * inverseCon);
-        if (theRace.getType().equals("Oval")) {
+        if (theRace.getType().equals(TrackType.LARGE_OVAL)) {
             ability = theCar.getDriver().getSmallOval() + .75 * theCar.getOval();
-        } else if (theRace.getType().equals("RC")) {
+        } else if (theRace.getType().equals(TrackType.ROAD_COURSE)) {
             ability = theCar.getDriver().getRoad() + .75 * theCar.getRoad();
-        } else if (theRace.getType().equals("Street")) {
+        } else if (theRace.getType().equals(TrackType.ROAD_COURSE)) {
             ability = (theCar.getDriver().getStreet() + theCar.getRoad());
         }
         ability /= 1.75;//because we're now adding driver and car ability..  so halve it
@@ -841,61 +841,61 @@ public class Application {
     }*/
 
     public static void existingTracks() {
-        allTrackList.add(new Track("Streets of St. Petersburg", "Street", 1.8, 14,
+        allTrackList.add(new Track("Streets of St. Petersburg", TrackType.ROAD_COURSE, 1.8, 14,
                 "United States", "Florida", "St. Petersburg"));
-        allTrackList.add(new Track("Phoenix Internatinal Raceway", "Oval", 1.022, 4,
+        allTrackList.add(new Track("Phoenix Internatinal Raceway", TrackType.SMALL_OVAL, 1.022, 4,
                 "United States", "Arizona", "Phoenix"));
-        allTrackList.add(new Track("Streets of Long Beach", "Street", 1.968, 11,
+        allTrackList.add(new Track("Streets of Long Beach", TrackType.ROAD_COURSE, 1.968, 11,
                 "United States", "California", "Long Beach"));
-        allTrackList.add(new Track("Barber Motorsports Park", "RC", 2.38, 15,
+        allTrackList.add(new Track("Barber Motorsports Park", TrackType.ROAD_COURSE, 2.38, 15,
                 "United States", "Alabama", "Leeds"));
-        allTrackList.add(new Track("Indianapolis Motor Speedway", "RC", 2.439, 13,
+        allTrackList.add(new Track("Indianapolis Motor Speedway", TrackType.ROAD_COURSE, 2.439, 13,
                 "United States", "Indiana", "Speedway"));
-        allTrackList.add(new Track("Indianapolis Motor Speedway", "Oval", 2.5, 4,
+        allTrackList.add(new Track("Indianapolis Motor Speedway", TrackType.LARGE_OVAL, 2.5, 4,
                 "United States", "Indiana", "Speedway"));
-        allTrackList.add(new Track("The Raceway at Belle Isle Park", "Street", 2.35, 14,
+        allTrackList.add(new Track("The Raceway at Belle Isle Park", TrackType.ROAD_COURSE, 2.35, 14,
                 "United States", "Michigan", "Detroit"));
-        allTrackList.add(new Track("Texas Motor Speedway", "Oval", 1.44, 4,
+        allTrackList.add(new Track("Texas Motor Speedway", TrackType.SMALL_OVAL, 1.44, 4,
                 "United States", "Texas", "Fort Worth"));
-        allTrackList.add(new Track("Road America", "RC", 4.048, 14,
+        allTrackList.add(new Track("Road America", TrackType.ROAD_COURSE, 4.048, 14,
                 "United States", "Wisconson", "Elkhart Lake"));
-        allTrackList.add(new Track("Iowa Speedway", "Oval", .875, 4,
+        allTrackList.add(new Track("Iowa Speedway", TrackType.SMALL_OVAL, .875, 4,
                 "United States", "Iowa", "Newton"));
-        allTrackList.add(new Track("Streets of Toronto", "Street", 1.755, 11,
+        allTrackList.add(new Track("Streets of Toronto", TrackType.ROAD_COURSE, 1.755, 11,
                 "Canada", "Ontario", "Toronto"));
-        allTrackList.add(new Track("Mid-Ohio Sports Car Course", "RC", 2.258, 13,
+        allTrackList.add(new Track("Mid-Ohio Sports Car Course", TrackType.ROAD_COURSE, 2.258, 13,
                 "United States", "Ohio", "Lexington"));
-        allTrackList.add(new Track("Pocono Raceway", "Oval", 2.5, 3,
+        allTrackList.add(new Track("Pocono Raceway", TrackType.LARGE_OVAL, 2.5, 3,
                 "United States", "Pennsylvania", "Long Pond"));
-        allTrackList.add(new Track("Gateway Motorsports Park", "Oval", 1.25, 4,
+        allTrackList.add(new Track("Gateway Motorsports Park", TrackType.SMALL_OVAL, 1.25, 4,
                 "United States", "Illinois", "Madison"));
-        allTrackList.add(new Track("Portland International Raceway", "Street", 1.967, 12,
+        allTrackList.add(new Track("Portland International Raceway", TrackType.ROAD_COURSE, 1.967, 12,
                 "United States", "Oregon", "Portland"));
-        allTrackList.add(new Track("Sonoma Raceway", "RC", 2.385, 12,
+        allTrackList.add(new Track("Sonoma Raceway", TrackType.ROAD_COURSE, 2.385, 12,
                 "United States", "California", "Sonoma"));
-        allTrackList.add(new Track("Laguna Seca Raceway", "RC", 2.238, 11,
+        allTrackList.add(new Track("Laguna Seca Raceway", TrackType.ROAD_COURSE, 2.238, 11,
                 "United States", "California", "Monterey"));
-        allTrackList.add(new Track("Auto Club Speedway", "Oval", 2, 4,
+        allTrackList.add(new Track("Auto Club Speedway", TrackType.LARGE_OVAL, 2, 4,
                 "United States", "California", "Fontana"));
-        allTrackList.add(new Track("Chicagoland Speedway", "Oval", 1.52, 4,
+        allTrackList.add(new Track("Chicagoland Speedway", TrackType.LARGE_OVAL, 1.52, 4,
                 "United States", "Illinois", "Joliet"));
-        allTrackList.add(new Track("Edmonton Stret Circuit", "Street", 2.224, 13,
+        allTrackList.add(new Track("Edmonton Stret Circuit", TrackType.ROAD_COURSE, 2.224, 13,
                 "Canada", "Alberta", "Edmonton"));
-        allTrackList.add(new Track("Richmond International Raceway", "Oval", .75, 4,
+        allTrackList.add(new Track("Richmond International Raceway", TrackType.SMALL_OVAL, .75, 4,
                 "United States", "Virginia", "Richmond"));
-        allTrackList.add(new Track("Kentucky Speedway", "Oval", 1.48, 4,
+        allTrackList.add(new Track("Kentucky Speedway", TrackType.SMALL_OVAL, 1.48, 4,
                 "United States", "Kentucky", "Sparta"));
-        allTrackList.add(new Track("Michigan International Speedway", "Oval", 2, 4,
+        allTrackList.add(new Track("Michigan International Speedway", TrackType.LARGE_OVAL, 2, 4,
                 "United States", "Michigan", "Brooklyn"));
-        allTrackList.add(new Track("Milwaukee Mile", "Oval", 1.025, 4,
+        allTrackList.add(new Track("Milwaukee Mile", TrackType.SMALL_OVAL, 1.025, 4,
                 "United States", "Wisconsin", "Milwaukee"));
-        allTrackList.add(new Track("Twin Ring Motegi", "Oval", 1.549, 4,
+        allTrackList.add(new Track("Twin Ring Motegi", TrackType.SMALL_OVAL, 1.549, 4,
                 "Japan", "Tochegi", "Motegi"));
-        allTrackList.add(new Track("Twin Ring Motegi", "RC", 2.983, 14,
+        allTrackList.add(new Track("Twin Ring Motegi", TrackType.ROAD_COURSE, 2.983, 14,
                 "Japan", "Tochegi", "Motegi"));
-        allTrackList.add(new Track("New Hampshire Motor Speedway", "Oval", 1.025, 4,
+        allTrackList.add(new Track("New Hampshire Motor Speedway", TrackType.SMALL_OVAL, 1.025, 4,
                 "United States", "New Hampshire", "Loudon"));
-        allTrackList.add(new Track("Circuit of the Americas", "RC",  3.427, 20,
+        allTrackList.add(new Track("Circuit of the Americas", TrackType.ROAD_COURSE,  3.427, 20,
                 "United States", "Texas", "Austin"));
 
 
@@ -994,11 +994,11 @@ public class Application {
                     //of how many races done and then randomize it a bit
                 }
             } else if (theCar.getFullTime() == 2) {//road/street
-                if (theRace.getType() != "Oval") {
+                if (!theRace.getType().isOval()) {
                     entryList.add(theCar);
                 }
             } else if (theCar.getFullTime() == 3) {//ovals
-                if (theRace.getType() == "Oval") {
+                if (theRace.getType().isOval()) {
                     entryList.add(theCar);
                 }
             } else if (theCar.getFullTime() == 4) {//May

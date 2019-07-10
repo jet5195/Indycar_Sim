@@ -7,7 +7,7 @@ import java.util.List;
 public class Track {
     private String name;
 
-    private String type;
+    private TrackType type;
     private double miles;
     private int laps;
 
@@ -16,7 +16,7 @@ public class Track {
     private String state;
     private String city;
 
-    public Track(String name, String type, double miles, int turns, String country, String state, String city) {
+    public Track(String name, TrackType type, double miles, int turns, String country, String state, String city) {
         this.name = name;
         this.type = type;
         this.miles = miles;
@@ -36,11 +36,11 @@ public class Track {
     }
 
 
-    public String getType() {
+    public TrackType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(TrackType type) {
         this.type = type;
     }
 
@@ -85,11 +85,11 @@ public class Track {
     }
 
     public double lapTime(){
-        double mph = 250;//lolz this is the average speed; maybe make it different for oval and rc/street
+        double mph = 250;//this is the average speed; maybe make it different for oval and rc/street
         //mph-=5*theRace.getTurns();
-        if(this.getType()!="Oval"){
+        if(!this.getType().isOval()){
             mph-=15*this.getMiles();
-            if (this.getType()=="Street"){
+            if (this.getType()==TrackType.STREET_COURSE){
                 mph-=10;
             }
         }
