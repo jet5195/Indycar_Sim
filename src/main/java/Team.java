@@ -29,9 +29,8 @@ public class Team {
         this.reliability = reliability;
     }
 
-    public Car createCar(Driver driver, String number, int fullTime){
-        Car newCar = new Car(driver, number, this.name, fullTime, this.road, this.street, this.smallOval, this.largeOval, this.pitCrew);
-        return newCar;
+    public Car createCar(Driver driver, String number, EntryType entryType){
+        return new Car(driver, number, this.name, entryType, this.road, this.street, this.smallOval, this.largeOval, this.pitCrew);
     }
 
 }

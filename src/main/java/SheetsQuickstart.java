@@ -107,7 +107,7 @@ public class SheetsQuickstart {
         }
     }
 
-    public static List<Engine> getEngineList() throws IOException, GeneralSecurityException {
+    public static List<Engine> getEngineList() {
         List<Engine> engineList = new ArrayList<Engine>();
         List<List<Object>> values = null;
         try {
@@ -130,7 +130,7 @@ public class SheetsQuickstart {
         return engineList;
     }
 
-    public static List<Engine> setEngineStatsByYear(List<Engine> engineList, int year) throws IOException, GeneralSecurityException {
+    public static List<Engine> setEngineStatsByYear(List<Engine> engineList, int year) {
         List<Engine> activeEngineList =  List.copyOf(engineList);
         List<List<Object>> values = null;
         try {
@@ -184,7 +184,7 @@ public class SheetsQuickstart {
         return teamList;
     }
 
-    public static void setTeamStatsByYear(List<Team> teamList, int year, List<Engine> engineList) throws IOException, GeneralSecurityException {
+    public static void setTeamStatsByYear(List<Team> teamList, int year, List<Engine> engineList) {
         List<List<Object>> values = null;
         try {
             values = initialCall("Teams " + year);

@@ -13,7 +13,7 @@ public class Car implements Comparable<Car>{
     private int tireAge;
     private int tireType;
     private int lastPit;
-    private int fullTime;//0 is full, 1 is half, 2 is road/street, 3 is just Ovals, 4 is just May, 5 is just Indy 500
+    private EntryType entryType;//0 is full, 1 is half, 2 is road/street, 3 is just Ovals, 4 is just May, 5 is just Indy 500
     private int speed;
     private int qualSpeed;
     private double raceAbility;
@@ -30,11 +30,11 @@ public class Car implements Comparable<Car>{
     //instead of the team keeping track of its cars?
 
 
-    public Car(Driver driver, String number, String team, int fullTime, int smallOval, int largeOval, int road, int street, int pitCrew){
+    public Car(Driver driver, String number, String team, EntryType entryType, int smallOval, int largeOval, int road, int street, int pitCrew){
         this.driver = driver;
         this.number = number;
         this.team = team;
-        this.fullTime = fullTime;
+        this.entryType = entryType;
         this.smallOval = smallOval;
         this.largeOval = largeOval;
         this.road = road;
@@ -186,12 +186,12 @@ public class Car implements Comparable<Car>{
         this.lastPit = lastPit;
     }
 
-    public int getFullTime() {
-        return fullTime;
+    public EntryType getEntryType() {
+        return entryType;
     }
 
-    public void setFullTime(int fullTime) {
-        this.fullTime = fullTime;
+    public void setEntryType(EntryType entryType) {
+        this.entryType = entryType;
     }
 
     public int getSpeed() {
