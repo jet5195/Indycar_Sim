@@ -12,8 +12,9 @@ public class Track {
     private String country;
     private String state;
     private String city;
+    private int prestige;
 
-    public Track(String name, TrackType type, double miles, int turns, String country, String state, String city) {
+    public Track(String name, TrackType type, double miles, int turns, String country, String state, String city, int prestige) {
         this.name = name;
         this.type = type;
         this.miles = miles;
@@ -21,6 +22,7 @@ public class Track {
         this.state = state;
         this.city = city;
         this.turns = turns;
+        this.prestige = prestige;
     }
 
 
@@ -100,5 +102,11 @@ public class Track {
         //returns the fastest possible laptime for a track! Doesn't do too poorly
     }
 
+    public int getPrestige() {
+        return prestige;
+    }
 
+    public void setPrestige(int prestige) {
+        this.prestige = prestige;
+    }
 }

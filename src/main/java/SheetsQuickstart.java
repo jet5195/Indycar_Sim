@@ -90,7 +90,8 @@ public class SheetsQuickstart {
         }
     }
 
-    public static void getTrackList(List<Track> trackList) throws IOException, GeneralSecurityException {
+    public static List<Track> getTrackList() throws IOException, GeneralSecurityException {
+        List<Track> trackList = new ArrayList<>();
         List<List<Object>> values = initialCall("Tracks");
         values.remove(0);
         if (values == null || values.isEmpty()) {
@@ -99,12 +100,39 @@ public class SheetsQuickstart {
             //System.out.println("Name, Major");
             for (List row : values) {
                 if(!row.get(0).toString().equals("")) {
-                    Track newTrack = new Track(row.get(0).toString(), TrackType.valueOf(row.get(2).toString()), Double.parseDouble(row.get(3).toString()),
-                            Integer.parseInt(row.get(4).toString()), row.get(5).toString(), row.get(6).toString(), row.get(7).toString());
+                    Track newTrack = new Track(row.get(1).toString(), TrackType.valueOf(row.get(2).toString()), Double.parseDouble(row.get(3).toString()),
+                            Integer.parseInt(row.get(4).toString()), row.get(5).toString(), row.get(6).toString(), row.get(7).toString(), Integer.parseInt(row.get(8).toString()));
                     trackList.add(newTrack);
                 }
             }
         }
+        return trackList;
+    }
+
+    public static List<Race> setRaceListByYear(List<Track> trackList, int year) {
+        List<Race> raceList =  new ArrayList<>();
+        List<List<Object>> values = null;
+        try {
+            values = initialCall("Races " + year);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (GeneralSecurityException e) {
+            e.printStackTrace();
+        }
+        values.remove(0);
+        if (values == null || values.isEmpty()) {
+            System.out.println("No data found.");
+        } else {
+            for (List row : values) {
+                if(!row.get(0).toString().equals("")) {
+                    Track track = trackList.get(Integer.parseInt(row.get(0).toString()));
+                    Race race = new Race(track, row.get(6).toString(), Integer.parseInt(row.get(4).toString()), track.getPrestige());
+                    race.setDoublePoints(row.get(7).toString().equals("TRUE"));
+                    raceList.add(race);
+                }
+            }
+        }
+        return raceList;
     }
 
     public static List<Engine> getEngineList() {
