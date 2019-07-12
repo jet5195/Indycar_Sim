@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Car implements Comparable<Car>{
     private static int horsepower = 700;
     private static int torque = 500;
@@ -14,8 +16,8 @@ public class Car implements Comparable<Car>{
     private int tireType;
     private int lastPit;
     private EntryType entryType;//0 is full, 1 is half, 2 is road/street, 3 is just Ovals, 4 is just May, 5 is just Indy 500
-    private int speed;
-    private int qualSpeed;
+    private double speed;//used as laptime for qualifying session, then total time for race sessions
+    //private double qualifyTime;
     private double raceAbility;
     private int smallOval;
     private int largeOval;
@@ -170,6 +172,29 @@ public class Car implements Comparable<Car>{
         tireType = type;
     }
 
+    public double calculateLapTime(Race race, LapType lapType){
+        //optimization is a double with a number somewhere around 1
+        double lapTime = race.getTrack().getLapTime();
+        int min =  998000;
+        int max = 1002000;
+        Random r = new Random();
+        double randomFactor = ((double)r.ints(1, min, max).findFirst().getAsInt())/1000000;
+        //System.out.println("random factor is: " + randomFactor + ", RaceAbility is: " + raceAbility);
+        if (lapType == LapType.QUALIFY){
+
+        }
+        return lapTime*randomFactor * this.getRaceAbility();
+    }
+
+    public double calculateMPH(Race race, LapType lapType){
+        double lapTime = this.calculateLapTime(race, lapType);
+        return calculateMPH(lapTime, race.getTrack());
+    }
+
+    public double calculateMPH(double lapTime, Track track){
+        return (track.getMiles()/lapTime)*3600;
+    }
+
     public int getTireAge() {
         return tireAge;
     }
@@ -194,28 +219,55 @@ public class Car implements Comparable<Car>{
         this.entryType = entryType;
     }
 
-    public int getSpeed() {
+    public double getSpeed() {
         return speed;
     }
 
-    public void setSpeed(int speed) {
+    public void setSpeed(double speed) {
         this.speed = speed;
     }
 
-    public int getQualSpeed() {
-        return qualSpeed;
+/*    public double getQualifyTime() {
+        return qualifyTime;
     }
 
-    public void setQualSpeed(int qualSpeed) {
-        this.qualSpeed = qualSpeed;
-    }
+    public void setQualifyTime(double qualifyTime) {
+        this.qualifyTime = qualifyTime;
+    }*/
 
     public double getRaceAbility() {
         return raceAbility;
     }
 
-    public void setRaceAbility(double raceAbility) {
-        this.raceAbility = raceAbility;
+    public void setRaceAbility(Race race) {//call this once before a race
+        int carAbility = 0;
+        int driverAbility = 0;
+        if (race.getType()==TrackType.STREET_COURSE){
+            carAbility = this.getStreet();
+            driverAbility = this.getDriver().getStreet();
+        }
+        else if (race.getType()==TrackType.ROAD_COURSE){
+            carAbility = this.getRoad();
+            driverAbility = this.getDriver().getRoad();
+        }
+        else if (race.getType()==TrackType.SMALL_OVAL){
+            carAbility = this.getSmallOval();
+            driverAbility = this.getDriver().getSmallOval();
+        }
+        else if (race.getType()==TrackType.LARGE_OVAL){
+            carAbility = this.getLargeOval();
+            driverAbility = this.getDriver().getLargeOval();
+        }
+        double newConsistency = (double) this.getDriver().getConsistency() / 2 + 25;
+        double inverseCon = 100 - newConsistency;
+        double subtract = (Math.random() * inverseCon);
+        driverAbility -= subtract;
+        //System.out.print("driverAbility: " + driverAbility + ", carAbility: " + carAbility +  " = ");
+        //double consistency = this.getDriver().getConsistency();
+        this.raceAbility = driverAbility + carAbility*.50;
+        //System.out.println(ability);
+        this.raceAbility = (this.raceAbility+4000)/4075;
+        this.raceAbility = (this.raceAbility* -1) + 2;//before this, a higher number means you're faster. Which isn't useful if we're looking at laptimes, so this inverses it.
     }
 
     public void endOfRaceReset() {
@@ -233,10 +285,14 @@ public class Car implements Comparable<Car>{
         this.position = position;
     }
 
+    public void doLap(Race race, LapType lapType) {
+        this.speed += this.calculateLapTime(race, lapType);
+    }
+
     //@Override
     public int compareTo(Car o) {
-        int compareSpeed = o.getSpeed();
-        return compareSpeed - this.speed;
+        double compareSpeed = o.getSpeed();
+        return (int)(this.speed*1000 - compareSpeed*1000);
     }
 
 }

@@ -83,7 +83,7 @@ public class Track {
         this.city = city;
     }
 
-    public double lapTime(){
+    public double getLapTime(){
         double mph = 250;//this is the average speed; maybe make it different for oval and rc/street
         //mph-=5*theRace.getTurns();
         if(!this.getType().isOval()){

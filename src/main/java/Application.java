@@ -103,7 +103,8 @@ public class Application {
             System.out.println("4. Create Driver");
             System.out.println("5. Create Entry");
             System.out.println("6. Set Sim Mode");
-            System.out.println("7. Exit");
+            System.out.println("7. Testing");
+            System.out.println("8. Exit");
             int input = scan.nextInt();
             boolean yearGo = true;
             switch (input) {
@@ -154,6 +155,9 @@ public class Application {
                     }
                     break;
                 case 7:
+                    testing();
+                    break;
+                case 8:
                     go = false;
                     break;
                 default:
@@ -161,6 +165,33 @@ public class Application {
                     break;
             }
         }
+    }
+
+    public static void testing() {
+        Car car = allCarList.get(0);
+        Race race = activeRaceList.get(5);
+        System.out.println(race);
+/*        for (int i = 0; i < 150; i++) {
+            System.out.println(car.calculateLapTime(race, 1));
+
+        }*/
+
+        for (int i = 0; i < allCarList.size(); i++) {
+            car = allCarList.get(i);
+            System.out.println(car.getDriver());
+            car.setRaceAbility(race);
+            System.out.println(car.calculateLapTime(race, LapType.QUALIFY));
+            //System.out.println(car.getRaceSpeed(race));
+        }
+/*        Car car = allCarList.get(0);
+        for (int i = 0; i < activeRaceList.size(); i++) {
+            Race race = activeRaceList.get(i);
+            System.out.println(race);
+            double lapTime = race.getTrack().getLapTime();
+            System.out.println(car.getLapTime(race) + " seconds");
+            System.out.println(car.calculateMPH(lapTime, race.getTrack()) + " MPH");
+            System.out.println("____________________\n");
+        }*/
     }
 
     public static void careerMenu(Scanner scan) {
@@ -400,14 +431,12 @@ public class Application {
     }
 
     public static void qualify(Race theRace, int mode) {
-        double speedcalc = 0;
         System.out.println(theRace.getRaceTitle() + " Qualifying Results");
         System.out.println("__________________________________");
         createEntryList(theRace);
         //use entry here and under
         for (int i = 0; i < entryList.size(); i++) {
             Car theCar = entryList.get(i);
-            theRace.getLapTime();
 //            int inverseCon = 225 - theCar.getDriver().getConsistency();
 //            double rand = Math.random() * inverseCon;
 //            double aggBonus = Math.random() * (theCar.getDriver().getAggression() / 10);
@@ -418,7 +447,7 @@ public class Application {
 //                speedcalc = theCar.getDriver().getSmallOval() - rand + aggBonus;
 //            }
 //            theCar.setSpeed((int) speedcalc + 120);
-            double qualSpeed = 0;
+            /*double qualSpeed = 0;
             int attempt = 0;
             while (attempt < 3) {
                 double newQualSpeed = initRaceAbility(theRace, theCar);//calls initRaceAbility but doesn't save it to the car.. that's done later
@@ -429,7 +458,9 @@ public class Application {
             }
             int qualBonus = (int) (theCar.getDriver().getQualify() / 16 * (((Math.random()))));
             theCar.setSpeed((int) qualSpeed + qualBonus);
-            entryList.set(i, theCar);
+            entryList.set(i, theCar);*/
+            theCar.setRaceAbility(theRace);
+            theCar.setSpeed(theCar.calculateLapTime(theRace, LapType.QUALIFY));
         }
 
         Collections.sort(entryList);
@@ -444,17 +475,17 @@ public class Application {
         }
         entryList.get(0).getDriver().addPole();
 
-        String bumpString = new String("");
+        String bumpString = "";
         while (entryList.size() > 33) {
             bumpString += (entryList.get(entryList.size() - 1).getDriver() + " was bumped.\n");
             entryList.remove(entryList.size() - 1);
         }
 
         for (int i = 0; i < entryList.size(); i++) {
-            entryList.get(i).setQualSpeed(entryList.get(i).getSpeed());
+           // entryList.get(i).setQualifyTime(entryList.get(i).getSpeed());
             entryList.get(i).setPosition(i + 1);
             String start = (i + 1) + ". ";
-            System.out.printf("%-30s %d\n", start + entryList.get(i).getDriver().getFirstName() + " " + entryList.get(i).getDriver().getLastName(), entryList.get(i).getSpeed());
+            System.out.printf("%-30s %f\n", start + entryList.get(i).getDriver().getFirstName() + " " + entryList.get(i).getDriver().getLastName(), entryList.get(i).getSpeed());
         }
 
         if (!Objects.equals(bumpString, "")) {
@@ -465,7 +496,7 @@ public class Application {
 
     }
 
-    public static double createSpeed(Car theCar, Race theRace) {
+   /* public static double createSpeed(Car theCar, Race theRace) {
         int speedConstant = 1800;
         double ability = theCar.getRaceAbility() * .75;//was without the *.75
         int inverseCon = 75 - (theCar.getDriver().getConsistency() / 5) + 15; // was 4) + 10
@@ -473,15 +504,9 @@ public class Application {
         double aggBonus = Math.random() * (theCar.getDriver().getAggression() / 10);
         double noise = Math.random() * 125 + 75;
         double speedcalc = ability - rand + aggBonus + noise;
-        // printSpeedCalc(theDriver, theDriver.getQualSpeed(), ability, rand, aggBonus, noise, speedcalc);
+        // printSpeedCalc(theDriver, theDriver.getQualifyTime(), ability, rand, aggBonus, noise, speedcalc);
         return speedcalc + theCar.getSpeed() + speedConstant;
-    }
-
-    public static double getLapTime(Race theRace, Car theCar, int mode) {//mode is 1 for caution, 2 for conserve, 3 for normal, 4 for push
-        //do something with createSpeed and use that math to do something...
-        //hardest part is going to be the way it sorts with speed, maybe inverse that since the lower numbers will be first?
-        return 0;
-    }
+    }*/
 
     public static void printSpeedCalc(Driver theDriver, int qualSpeed, double roadOval, double rand, double aggBonus, double randomBonus, double speedCalc) {
         System.out.printf("              %-20s   %-8s   %-8s   %-8s   %-8s   %-8s\n", "Driver Name", "Ability", "Cons", "Aggr", "Random", "SpeedCalc");
@@ -526,7 +551,7 @@ public class Application {
                 }
                 entryList.get(j).getDriver().setDnf(true);
                 crashOthers(j, likelihood, crashOthers);
-                entryList.get(j).setSpeed(-1);
+                entryList.get(j).setSpeed(Double.MAX_VALUE);
                 entryList.get(j).getDriver().addDnf();
             }
             return wrecked;
@@ -568,7 +593,7 @@ public class Application {
     public static int yellowLap(Race theRace, int lap, int cautionLaps) {
         System.out.println("\nCAUTION Lap " + cautionLaps + " of 3");
         System.out.println("=======================");
-        int speed = entryList.get(0).getSpeed() + 2000;
+        double speed = entryList.get(0).getSpeed() + 2000;//no clue why I'm adding 2000 here, maybe an average lap?
         int i = 0;
 
         while (i < entryList.size() && !entryList.get(i).getDriver().isDnf()) {
@@ -579,7 +604,7 @@ public class Application {
             //tire stuff here
 
 
-            speed -= 50;
+            speed +=1;
             entryList.get(i).setSpeed(speed);
             i++;
             //if(wait == 1){
@@ -593,15 +618,34 @@ public class Application {
         if (wait < 4) {
             waitForUser();
         }
-        int j = 0;
+        double j = 0;
         //set race ability and set starting positions (50 "speed" from one another")
-        for (int i = entryList.size() - 1; i >= 0; i--) {
+        for (int i= 0; i < entryList.size(); i++) {
             entryList.get(i).addFuel(18.5);
             entryList.get(i).changeTires(1);
-            entryList.get(i).setRaceAbility(initRaceAbility(theRace, entryList.get(i)));
+            entryList.get(i).setRaceAbility(theRace);
+            if (theRace.getRaceTitle().equals("Indianapolis 500")){
+                // 0 1 2
+                // 3 4 5
+                // 6 7 8
+                if (i%3==0){
+                    j+=.25;
+                } else {
+                    j+=.05;
+                }
+            } else {
+                // 0 1
+                // 2 3
+                // 4 5
+                if (i%2==0){
+                    j+=.25;
+                } else {
+                    j+= .05;
+                }
+            }
             entryList.get(i).setSpeed(j);
-            j += 50;
         }
+
         int cautionLaps = 0;
         //go through all the laps
         for (int lap = 1; lap <= theRace.getLaps(); lap++) {
@@ -647,8 +691,8 @@ public class Application {
                 entryList.get(i).decreaseFuel(theRace.getMiles(), mode);
                 //tire stuff here
 
-                double dspeed = createSpeed(entryList.get(i), theRace);
-                entryList.get(i).setSpeed((int) dspeed);
+                //double dspeed = createSpeed(entryList.get(i), theRace);
+                entryList.get(i).doLap(theRace, LapType.GREEN);
 
             }
         }
@@ -689,7 +733,7 @@ public class Application {
             } else {
                 System.out.print("     ");
             }
-            if (entryList.get(i).getSpeed() == -1) {
+            if (entryList.get(i).getSpeed() == Double.MAX_VALUE) {
                 System.out.print("OUT");
             }
             //System.out.printf("%.2f", entryList.get(i).getFuel());
