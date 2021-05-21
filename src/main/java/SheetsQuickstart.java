@@ -212,6 +212,34 @@ public class SheetsQuickstart {
         return teamList;
     }
 
+    public static List<Car> getCarList(int year, List<Driver> driverList, List<Team> teamList){
+        List<Car> carList = new ArrayList<Car>();
+        List<List<Object>> values = null;
+        try {
+            values = initialCall("Drivers x Teams " + year);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (GeneralSecurityException e) {
+            e.printStackTrace();
+        }
+        values.remove(0);
+        if (values == null || values.isEmpty()) {
+            System.out.println("No data found.");
+        } else {
+            for (List row : values) {
+                if (!row.get(0).toString().equals("") && !row.get(1).toString().equals("")) {
+                    carList.add(teamList.get(Integer.parseInt(row.get(4).toString())).
+                            createCar(driverList.get(Integer.parseInt(row.get(0).toString())),
+                            row.get(1).toString(),
+                            EntryType.valueOf(row.get(6).toString())));
+                    //carList.add(new Car(driverList.get(Integer.parseInt(row.get(0).toString())), Integer.parseInt(row.get(1).toString()),
+
+                }
+            }
+        }
+        return carList;
+    }
+
     public static void setTeamStatsByYear(List<Team> teamList, int year, List<Engine> engineList) {
         List<List<Object>> values = null;
         try {
